@@ -1,0 +1,97 @@
+.tutor-wrap {
+  @apply bg-beige;
+  @apply p-0;
+
+  .tutor-course-details-page {
+    @apply w-full;
+    @apply max-w-screen-max;
+    @apply mx-auto;
+    @apply px-xs;
+    @apply py-sm;
+    @apply sm:p-sm;
+    @apply md:p-md;
+    @apply pt-[20vh];
+  }
+
+  .tutor-course-details-title {
+    font-family: "FacultyGlyphic", Arial, sans-serif !important;
+    font-size: 2rem !important;
+    letter-spacing: 0.5px !important;
+    line-height: 1.2 !important;
+    word-break: break-word !important;
+
+    @media (min-width: $breakpoint-desktop) {
+      font-size: 2.875rem !important;
+    }
+  }
+
+  .tutor-card {
+    @apply border-0 !important;
+    @apply rounded-none !important;
+
+    .tutor-card-body {
+      @apply bg-white !important;
+      @apply border-0 !important;
+      @apply rounded-none !important;
+    }
+
+    .tutor-card-footer {
+      @apply border-0 !important;
+      @apply rounded-none !important;
+    }
+  }
+
+  .tutor-course-details-instructors {
+    @apply border-0 !important;
+    @apply rounded-none !important;
+  }
+  
+
+  .tutor-btn-primary {
+    @include reset-link;
+    appearance: none;
+    font-family: 'PlusJakartaSansBold';
+    letter-spacing: 0.5px;
+    line-height: 1;
+    @apply w-full;
+    @apply text-button;
+    @apply flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply cursor-pointer;
+    @apply px-[20px];
+    @apply py-[10px];
+    @apply relative;
+    @apply text-center;
+    @apply uppercase;
+    @apply no-underline;
+    @apply hover:no-underline;
+    @apply tracking-wide;
+    @apply text-white;
+    @apply bg-black;
+    @apply justify-center;
+    @apply gap-xs;
+    @apply border-2;
+    @apply border-transparent;
+  
+    &:hover,
+    &:focus {
+      color: var(--black) !important;
+      @apply bg-transparent;
+      @apply border-2;
+      @apply border-black;
+
+      &::after {
+        color: var(--black) !important;
+      }
+    }
+
+    &::after {
+      content: '→';
+      font-family: 'PlusJakartaSans';
+      font-size: 23px;
+      @apply relative;
+      @apply bottom-[2px];
+    }
+  }
+}

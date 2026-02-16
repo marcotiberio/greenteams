@@ -1,0 +1,16 @@
+{% extends 'templates/_document.twig' %}
+
+{% block content %}
+  <div class="tutor-wrap">
+    test
+    {% if function('post_password_required') %}
+      {{ function('get_the_password_form') }}
+    {% else %}
+      {{ post.content }}
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {# Footer removed for course pages #}
+{% endblock %}

@@ -1,0 +1,25 @@
+<flynt-component
+  load:on="idle" 
+  name="BlockBannerCta" 
+  class="w-full" 
+  style="
+    color: {% if options.colorText %}{{ options.colorText }}{% else %}var(--black){% endif %};
+    background-color: {% if options.colorBackground %}{{ options.colorBackground }}{% else %}transparent{% endif %};"
+  >
+  <div class="w-full max-w-screen-max mx-auto boxed flex flex-col md:flex-row {% if buttonLink %} justify-between {% else %} justify-start {% endif %} items-start gap-sm md:gap-xxl">
+    {% if title %}
+      <div class="h2 w-full max-w-[450px]">{{ title }}</div>
+    {% endif %}
+    {% if contentHtml %}
+      <div class="wysiwyg [&_*]:mb-0 w-full max-w-[450px]">{{ contentHtml|e('wp_kses_post') }}</div>
+    {% endif %}
+    {% if buttonLink %}
+      <a 
+        class="button button--outline" 
+        href="{{ buttonLink.url }}" 
+        {% if buttonLink.target %} target="{{ buttonLink.target }}" rel="noreferrer noopener"{% endif %}>
+        {{ buttonLink.title }}
+      </a>
+    {% endif %}
+  </div>
+</flynt-component>

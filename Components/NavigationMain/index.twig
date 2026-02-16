@@ -1,0 +1,12 @@
+<flynt-component load:on="idle" name="NavigationMainLeft" class="w-full flex justify-start items-center">
+  <nav class="navigation z-[99] w-full" aria-label="{{ labels.ariaLabel|e }}">
+    <div class="flex flex-row items-center justify-between gap-sm h-full w-full">
+      <div class="flex flex-row justify-between gap-lg items-center w-full">
+      {% include 'Partials/_logo.twig' with { 'logo': logo, 'site': site } only %}
+      {% if menu %}
+        {% include 'Partials/_menu.twig' with { 'items': menu.items } only %}
+      {% endif %}
+      </div>
+    </div>
+  </nav>
+</flynt-component>

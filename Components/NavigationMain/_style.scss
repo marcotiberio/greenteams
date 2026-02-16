@@ -1,0 +1,40 @@
+flynt-component[name='NavigationMainLeft'] {
+  .navigation {
+    .admin-bar & {
+      inset-block-start: var(--wp-admin--admin-bar--height);
+    }
+  }
+
+  .current-menu-item {
+    .link {
+      @apply text-green;
+    }
+
+    .current-menu-item {
+      .link {
+        @apply text-black;
+      }
+    }
+  }
+
+  .submenu {
+    align-items: flex-start;
+    background: var(--white);
+    column-gap: var(--spacingSmall);
+    display: flex;
+    flex-flow: row wrap;
+    height: auto;
+    justify-content: space-between;
+    padding: var(--spacingXSmall) 0;
+    position: absolute;
+    text-align: center;
+    top: 66px;
+    width: fit-content;
+  }
+
+  .button {
+    @media (min-width: $breakpoint-desktop) {
+      font-size: 1.25rem;
+    }
+  }
+}

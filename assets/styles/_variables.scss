@@ -1,0 +1,38 @@
+$breakpoint-mobile: 640px;
+$breakpoint-tablet: 780px;
+$breakpoint-desktop: 1180px;
+
+$heading-selectors: 'h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6';
+$input-selectors: '[type="tel"], [type="url"], [type="text"], [type="date"], [type="email"], [type="search"], [type="number"], [type="password"], textarea, select';
+
+:root {
+  --bodyFontSize: 16px; // Always use rem. 1rem = 16px
+  --bodyFontSizeSmall: 16px;
+  --flow-space: 1.5625rem;
+
+  --contentMaxWidth: 1000px;
+  --containerMaxWidth: 1440px;
+
+  --spacingXSmall: 10px;
+  --spacingSmall: 20px;
+  --spacingMedium: 35px;
+  --spacingLarge: 50px;
+  --spacingXLarge: 75px;
+  --spacingXXLarge: 125px;
+
+  --black: #303030;
+  --white: #fffeeb;
+  --yellow: #ffdd47;
+  --orange: #ff904f;
+  --lernen: #ff904f;
+  --green: #7bdb8f;
+  --blog: #7bdb8f;
+  --beige: #f6f4ca;
+  --blue: #6690ff;
+  --event: #6690ff;
+  --lightblue: #b4d9e8;
+  --grey: #f9f9f9;
+  --darkgrey: #28321e;
+  --acqua: #51bad9;
+  --azulgrey: #e6ecee;
+}

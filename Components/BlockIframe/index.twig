@@ -1,0 +1,24 @@
+<flynt-component 
+  load:on="visible" 
+  name="BlockIframe"
+  class=""
+  style="background-color: {% if options.colorBackground %}{{ options.colorBackground }}{% else %}transparent{% endif %};">
+  <div class="boxed componentSpacing">
+    <div class="contentMaxWidth">
+      {% if iframeUrl %}
+        <div class="iframe-container w-full">
+          <iframe 
+            src="{{ iframeUrl|e('esc_url') }}" 
+            frameborder="0" 
+            style="width: 100%; height: {{ height }}px; border: none;"
+            allowfullscreen
+            loading="lazy"
+            title="Embedded content"></iframe>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</flynt-component>
+
+
+

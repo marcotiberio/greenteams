@@ -1,0 +1,45 @@
+flynt-component[name='BlockPostFooter'] {
+  .tags {
+    @include reset-list;
+    display: flex;
+    flex-wrap: wrap;
+
+    .tag {
+      display: inline-block;
+      margin-inline: 0.5rem;
+    }
+  }
+
+  .author {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--flow-space) / 2);
+    text-align: start;
+
+    @media (min-width: $breakpoint-tablet) {
+      flex-direction: row;
+      gap: var(--flow-space);
+    }
+
+    .avatar-image {
+      border-radius: 50%;
+      width: 64px;
+
+      @media (min-width: $breakpoint-tablet) {
+        width: 96px;
+      }
+    }
+
+    .details {
+      --flow-space: 0.5rem;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .description {
+      font-size: var(--body-font-size-small);
+    }
+  }
+}

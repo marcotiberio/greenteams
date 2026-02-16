@@ -1,0 +1,20 @@
+flynt-component[name='ColumnsPublications'] {
+  // .content {
+  //   padding: var(--spacingLarge) 0;
+  // }
+
+  .columns {
+    display: grid;
+    gap: var(--spacingLarge);
+
+    @media (min-width: $breakpoint-mobile) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .image {
+      aspect-ratio: 4/3;
+      margin-bottom: var(--spacingSmall);
+      object-fit: cover;
+    }
+  }
+}

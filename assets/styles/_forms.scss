@@ -1,0 +1,328 @@
+form {
+  margin: 0;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+}
+
+legend {
+  color: var(--color-text);
+  font-size: var(--bodyFontSize);
+  font-weight: 700;
+  padding: 0;
+}
+
+label {
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+}
+
+.evf-privacy-policy-consent-message {
+  font-weight: 400 !important;
+}
+
+#{$input-selectors} {
+  appearance: none !important;
+  background-color: transparent !important;
+  border-bottom: 1px solid var(--black) !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+  border-radius: 0 !important;
+  caret-color: var(--color-text) !important;
+  color: var(--color-text) !important;
+  font-size: var(--body) !important;
+  margin-bottom: 0 !important;
+  max-width: 100%;
+  outline: none !important;
+  padding: 5px 0 !important;
+  transition: border-color 0.3s ease-in-out;
+  width: 100%;
+
+  &::placeholder {
+    color: var(--black);
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &:invalid {
+    border-color: var(--color-error);
+  }
+
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+select {
+  border: 1px solid var(--black) !important;
+  border-radius: 0 !important;
+  padding: 10px 40px 10px 10px !important;
+  margin-bottom: 0.5rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  font-size: var(--body) !important;
+  font-weight: 800 !important;
+  color: var(--black) !important;
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 12px 8px !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+.select2-selection {
+  border: 1px solid var(--black) !important;
+  border-radius: 0 !important;
+  padding: 0 40px 0 10px !important;
+  margin-bottom: 0.5rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  font-size: var(--body) !important;
+  font-weight: 800 !important;
+  color: var(--black) !important;
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 12px 8px !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+
+  .select2-search__field {
+    border: 0 !important;
+    border-radius: 0 !important;
+    font-size: 16px !important;
+    padding: 5px 12px!important;
+  }
+  
+  .select2-selection__choice {
+    background-color: var(--grey) !important;
+    border-radius: 0 !important;
+    font-size: var(--body) !important;
+    padding: 0 5px !important;
+    text-indent: 0px !important;
+  }
+
+  .select2-selection__rendered {
+    @apply flex items-center justify-start !important;
+  }
+  
+  .select2-selection__choice__remove {
+    color: var(--black) !important;
+    display: inline-block !important;
+    margin-right: 5px !important;
+  }
+}
+
+.everest-forms-uploader {
+  border: 1px solid var(--black) !important;
+
+  .dz-message {
+    display: contents !important;
+  }
+}
+
+// Wrapper approach for custom selects (if using a wrapper div)
+.select-wrapper,
+.evf-field-select {
+  position: relative;
+
+  select {
+    padding-right: 40px !important;
+  }
+}
+
+textarea {
+  border: 1px solid var(--black) !important;
+  height: 150px !important;
+  margin: 0;
+  max-width: 100%;
+  padding: 10px !important;
+  resize: vertical;
+  vertical-align: top;
+  width: 100%;
+}
+
+[type='checkbox'],
+[type='radio'] {
+  accent-color: var(--color-accent);
+  display: inline-block;
+  height: 20px;
+  margin-block-start: 4px;
+  margin-inline-end: 8px;
+  vertical-align: top;
+  width: 20px;
+
+  + label {
+    color: var(--color-text);
+    display: inline-block;
+    font: inherit;
+    width: calc(100% - 33px);
+  }
+}
+
+.everest-forms-submit-button {
+  appearance: none !important;
+  font-family: 'PlusJakartaSansBold' !important;
+  letter-spacing: 0.5px !important;
+  line-height: 1 !important;
+  border-radius: 0 !important;
+  @apply w-fit !important;
+  @apply text-button !important;
+  @apply flex !important;
+  @apply justify-center !important;
+  @apply items-center !important;
+  @apply cursor-pointer !important;
+  @apply mt-sm !important;
+  @apply px-[20px] !important;
+  @apply py-[10px] !important;
+  @apply relative !important;
+  @apply text-center !important;
+  @apply uppercase !important;
+  @apply no-underline !important;
+  @apply hover:no-underline !important;
+  @apply tracking-wide !important;
+  @apply text-black !important;
+  @apply bg-transparent !important;
+  @apply justify-center !important;
+  @apply gap-xs !important;
+  @apply border-2 !important;
+  @apply border-black !important;
+
+  &:hover,
+  &:focus {
+    color: var(--white) !important;
+    @apply bg-black !important;
+
+    &::after {
+      color: var(--white) !important;
+    }
+  }
+}
+
+.evf-field-description {
+  @apply italic !important;
+}
+
+.inverse-order {
+
+  &.dropdown {
+    @apply flex flex-col !important;
+
+    .evf-field-label {
+      @apply order-1 !important;
+    }
+
+    .evf-field-description {
+      @apply order-2 !important;
+    }
+
+    select {
+      @apply order-3 !important;
+    }
+  }
+
+  &.checkbox {
+    @apply flex flex-col !important;
+
+    .evf-field-label {
+      @apply order-1 !important;
+    }
+
+    .input-text {
+      @apply order-3 !important;
+    }
+
+    .evf-field-description {
+      @apply order-2 !important;
+    }
+  }
+}
+
+.everest-forms .everest-forms-notice {
+  @apply rounded-none !important;
+}
+
+.wpcf7 form .wpcf7-response-output {
+  margin: 0 !important;
+}
+
+.evf-container {
+  margin: 0 !important;
+  
+  ::placeholder {
+    color: var(--black) !important;
+    opacity: 1 !important;
+  }
+  .evf-field {
+    margin-bottom: 2rem !important;
+
+    &:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+  .wpforms-submit {
+    @include reset-link;
+    appearance: none;
+    font-family: 'FKGroteskNeue', Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1;
+    border-radius: 0 !important;
+    border: 1px solid var(--black) !important;
+    @apply py-[10px];
+    @apply px-[10px];
+    @apply text-black !important;
+    @apply uppercase;
+    @apply bg-transparent !important;
+    @apply justify-center;
+    @apply whitespace-nowrap;
+    @apply w-fit !important;
+    @apply flex !important;
+    @apply justify-center;
+    @apply items-center !important;
+    @apply cursor-pointer;
+    @apply relative !important;
+    @apply text-center;
+    @apply no-underline !important;
+  
+    &:hover,
+    &:focus {
+      color: var(--white) !important;
+      @apply bg-black !important;
+    }
+  }
+
+  ul {
+    list-style: none !important;
+
+    li {
+      &::before {
+        content: none !important;
+      }
+    }
+  }
+
+  .wpforms-confirmation-container-full {
+    @apply bg-transparent !important;
+    @apply border-0 !important;
+    @apply p-0 !important;
+    @apply m-0 !important;
+   
+
+    p {
+      @apply text-black !important;
+    }
+  }
+}

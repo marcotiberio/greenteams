@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html class="html {{ body_class }} horizontal page-{{ post.slug }}" id="theTop" lang="{{ site.language }}" {{ site.language_attributes }}>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }} {{ __('Feed', 'flynt') }}" href="{{ site.rss2 | e('esc_url') }}">
+    {{ function('wp_head') }}
+  </head>
+  <body>
+    <a href="#mainContent" class="skipLink">
+      {{ __("Skip to main content", "flynt") }}
+    </a>
+    {% block layout %}
+      <div class="pageWrapper">
+        <header class="w-full">
+          {% block header %}
+            <div class="wrapper wrapper--menu">
+              {# <div class="hidden lg:block w-full px-sm py-xs lg:px-lg fixed top-0 left-0 z-[3000] bg-white">
+                <div class="w-full max-w-screen-max mx-auto flex flex-row justify-between gap-sm">
+                  {{ renderComponent('NavigationMain') }}
+                </div>
+              </div> #}
+              {{ renderComponent('NavigationBurger') }}
+            </div>
+          {% endblock %}
+        </header>
+        <main id="mainContent" class="mainContent min-h-[calc(100vh-70px)] bg-beige" aria-label="{{ __('Content', 'flynt') }}">
+          {% if function('post_password_required') %}
+            {{ function('get_the_password_form') }}
+          {% else %}
+            {% block content %}
+              No <code>{{ '{% block content %}' }}</code> defined for this template.
+            {% endblock %}
+          {% endif %}
+        </main>
+        <footer class="mainFooter">
+          {% block footer %}
+            {{ renderComponent('NavigationFooter') }}
+          {% endblock %}
+        </footer>
+      </div>
+    {% endblock %}
+    <div class="wpFooter">
+      {{ function('wp_footer') }}
+    </div>
+  </body>
+</html>

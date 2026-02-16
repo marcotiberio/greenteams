@@ -1,0 +1,105 @@
+flynt-component[name='BlockGallery'] {
+  height: auto;
+  scroll-margin-top: 96px;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding: var(--spacingLarge) var(--spacingLarge) 0;
+  }
+
+  .wrapper {
+    column-count: 1;
+    column-gap: var(--spacingSmall);
+    display: block;
+    margin-block-start: 0;
+    padding-bottom: var(--spacingSmall);
+
+    @media (min-width: $breakpoint-mobile + 1) {
+      column-count: 2;
+      column-gap: var(--spacingLarge);
+      padding-bottom: var(--spacingLarge);
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+      column-count: 3;
+      column-gap: var(--spacingLarge);
+      padding-bottom: var(--spacingLarge);
+    }
+  }
+
+  .box {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-bottom: var(--spacingSmall);
+    transition: all 0.2s linear;
+    width: 100%;
+
+
+    @media (min-width: $breakpoint-tablet) {
+      margin-bottom: var(--spacingLarge);
+    }
+
+    &-inner {
+      height: 100%;
+      position: relative;
+      text-align: center;
+      transition: transform 0.2s linear;
+      width: 100%;
+
+      &--image {
+        figure {
+          height: 100%;
+          margin: 0;
+
+          img {
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+
+      &--content {
+        align-items: flex-start;
+        background-color: var(--white);
+        border: 2px solid var(--black);
+        display: none;
+        flex-flow: column;
+        height: 100%;
+        justify-content: space-between;
+        padding: var(--spacingSmall);
+        position: absolute;
+        text-align: left;
+        top: 0;
+        transition: all 0.2s linear;
+        width: 100%;
+
+        @media (max-width: $breakpoint-desktop - 1) {
+          display: flex;
+          gap: var(--spacingSmall);
+          position: relative;
+
+          .bottom {
+            align-items: flex-start;
+            display: flex;
+            flex-flow: column nowrap;
+            gap: 0;
+          }
+        }
+
+        .button {
+          width: fit-content;
+        }
+      }
+    }
+  }
+
+  .box {
+    &:hover {
+      .box-inner--content {
+        display: flex;
+        transition: all 0.2s linear;
+      }
+    }
+  }
+}

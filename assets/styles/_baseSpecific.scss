@@ -1,0 +1,235 @@
+// My Programm
+
+#savedEventsContainer {
+  .post-inner {
+    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    @apply gap-sm;
+    @apply py-sm;
+
+    .event-checkbox,
+    .postCheckbox {
+      display: none;
+    }
+  }
+}
+
+.favorites-list {
+  div {
+    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr 1fr 1fr 1fr;
+    @apply gap-sm;
+    @apply py-sm;
+
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: 1fr;
+      row-gap: 5px;
+    }
+
+    p:nth-child(2),
+    p:nth-last-child(2) {
+      @apply hidden;
+    }
+
+    p:first-child {
+      @apply order-2;
+      @apply text-[1.375rem];
+      line-height: 1.5rem;
+
+      @media (max-width: $breakpoint-mobile) {
+        @apply order-3;
+      }
+    }
+
+    .post--date-time {
+      @apply flex;
+      @apply order-1;
+      @apply p-0;
+      @apply text-bodyMenu;
+      @apply max-w-[160px];
+
+      @media (max-width: $breakpoint-mobile) {
+        @apply max-w-[145px];
+      }
+    }
+
+    .post--speakers {
+      @apply block;
+      @apply order-3;
+      @apply p-0;
+
+      @media (max-width: $breakpoint-mobile) {
+        @apply pb-sm;
+        @apply ml-[65px];
+      }
+
+      .post--speaker {
+        line-height: 1;
+        @apply block;
+        @apply mb-[5px];
+        @apply p-0;
+
+        &::before {
+          content: '→';
+          @apply mr-[5px];
+        }
+      }
+    }
+
+    .post--topic {
+      @apply flex;
+      @apply order-4;
+      @apply p-0;
+    }
+
+    .post--format {
+      @apply block;
+      @apply order-5;
+      @apply p-0;
+      @apply text-bodyMenu;
+      @apply text-black;
+      @apply opacity-25;
+
+      @media (max-width: $breakpoint-mobile) {
+        @apply flex;
+        @apply flex-row;
+        @apply justify-between;
+      }
+
+      div {
+        @apply flex;
+        @apply justify-start;
+        @apply items-start;
+        @apply p-0;
+      }
+    }
+
+    .post--stage {
+      @apply flex;
+      @apply order-6;
+      @apply p-0;
+      @apply text-bodyMenu;
+      @apply text-black;
+      @apply opacity-25;
+
+      @media (max-width: $breakpoint-mobile) {
+        @apply flex;
+        @apply flex-row;
+        @apply justify-start;
+      }
+    }
+
+    p:last-child {
+      @apply order-7;
+      @apply p-0;
+
+      @media (max-width: $breakpoint-mobile) {
+        @apply order-2;
+        @apply flex;
+        @apply justify-end;
+        @apply -mt-[35px];
+      }
+    }
+  }
+}
+
+// Ninja Forms
+
+.ninja-forms-form-wrap {
+  .nf-before-form-content {
+    display: none;
+  }
+
+  .nf-form-content {
+    input[type=submit] {
+      @include reset-link;
+      @apply bg-white;
+      @apply w-full;
+      @apply flex;
+      @apply justify-center;
+      @apply items-center;
+      @apply cursor-pointer;
+      @apply px-[5px];
+      @apply py-[5px];
+      @apply relative;
+      @apply text-center;
+      @apply no-underline;
+      @apply rounded-button;
+      appearance: none;
+      border: 1px solid var(--black) !important;
+      font-size: 1.3rem;
+      line-height: 1;
+
+      &:hover,
+      &:focus {
+        @apply bg-green;
+        @apply text-white;
+      }
+    
+      @media (min-width: $breakpoint-desktop) {
+        @apply px-sm;
+        @apply py-xs;
+      }
+    }
+  }
+}
+
+// Menu Home
+
+.home {
+  .wrapper--menu {
+    &.scrolled {
+      flynt-component[name=NavigationBurger] {
+        background: var(--yellow) !important;
+      }
+    }
+  }
+}
+
+.single {
+  &-post {
+    flynt-component[name=NavigationBurger] {
+      @apply bg-blog;
+    }
+  }
+  &-event {
+    flynt-component[name=NavigationBurger] {
+      @apply bg-event;
+    }
+  }
+  &-lernen {
+    flynt-component[name=NavigationBurger] {
+      @apply bg-lernen;
+    }
+  }
+}
+
+// Menu CPTs
+
+.single {
+  &-post {
+    flynt-component[name=NavigationBurger] {
+      .menu {
+        background: var(--blog) !important;
+      }
+    }
+  }
+
+  &-event {
+    flynt-component[name=NavigationBurger] {
+      .menu {
+        background: var(--event) !important;
+      }
+    }
+  }
+
+  &-lernen {
+    flynt-component[name=NavigationBurger] {
+      .menu {
+        background: var(--lernen) !important;
+      }
+    }
+  }
+}

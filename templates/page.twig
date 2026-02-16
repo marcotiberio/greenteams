@@ -1,0 +1,12 @@
+{% extends 'templates/_document.twig' %}
+
+{% block content %}
+  {% if fn('is_front_page') %}
+    {{ renderComponent('HeroHeaderHome', {'post': post}) }}
+  {% else %}
+    {{ renderComponent('BlockPageHeader', {'post': post}) }}
+  {% endif %}
+  {% for component in post.meta('pageComponents') %}
+    {{ renderComponent(component) }}
+  {% endfor %}
+{% endblock %}

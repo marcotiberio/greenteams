@@ -1,0 +1,24 @@
+{% extends 'templates/_document.twig' %}
+
+{% block content %}
+  <article class="post">
+    <div class="w-screen !my-0 !pt-[20vh] flex flex-col sm:flex-row sm:justify-between items-start lg:items-center bg-blog">
+      <div class="boxed">
+        <h1 class="">Blog</h1>
+      </div>
+    </div>
+    {{ renderComponent('BlockPostHeader', { post: post }) }}
+    </header>
+    <section class="post-main">
+      {% for component in post.meta('postComponents') %}
+        {{ renderComponent(component) }}
+      {% endfor %}
+    </section>
+    <section class="post-related">
+      {# {{ renderComponent('RelatedPosts', {'preContentTitle': '<h2>' ~ __('Related News') ~ '</h2>', 'taxonomies': post.categories(), 'options': {'maxPosts': 3}}) }} #}
+    </section>
+    <footer>
+      {{ renderComponent('BlockPostNav', { post: post }) }}
+    </footer>
+  </article>
+{% endblock %}

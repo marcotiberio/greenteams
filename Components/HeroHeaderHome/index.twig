@@ -1,0 +1,24 @@
+<flynt-component
+  load:on="visible" name="HeroHeaderHome"
+  class="w-full lg:h-screen mx-auto flex flex-col sm:flex-row justify-between items-end overflow-hidden"
+  style="background: {{ post.pageBackground }};">
+  {# <div class="">
+    <svg class="absolute z-10 top-[-425px] right-[-100px] lg:top-[-200px] lg:right-[-250px]" width="1440" height="1100" viewBox="0 0 1440 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="1133.65" cy="331.653" r="253.653" fill="#FFFEEB"/>
+      <circle cx="1048.5" cy="553.5" r="226.5" fill="#FFFEEB"/>
+      <ellipse cx="734.5" cy="336" rx="226.5" ry="227" fill="#FFFEEB"/>
+      <ellipse cx="279" cy="542.5" rx="227" ry="226.5" fill="#FFFEEB"/>
+    </svg>
+  </div> #}
+  <div class="bubbles_wrapper absolute top-0 right-0 w-screen h-full m-0 z-10">
+    <svg class="w-full h-full" width="1440" height="1100" viewBox="0 0 1440 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle class="bubble one" cx="1133.65" cy="331.653" r="253.653" fill="#FFFEEB"/>
+      <circle class="bubble two" cx="1048.5" cy="553.5" r="253.653" fill="#FFFEEB"/>
+      <circle class="bubble three" cx="734.5" cy="336" r="253.653" fill="#FFFEEB"/>
+      <circle class="bubble four" cx="279" cy="542.5" r="253.653" fill="#FFFEEB"/>
+    </svg>
+  </div>
+  <div class="relative z-20 boxed !my-0 !pt-[20vh] flex flex-col sm:flex-row sm:justify-between items-start lg:items-center gap-sm">
+    <h1 class="">{{ pageTitle }}</h1>
+  </div>
+</flynt-component>

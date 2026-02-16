@@ -1,0 +1,34 @@
+@import
+  'styles/mixins',
+  'styles/variables',
+  'styles/base';
+
+html {
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  text-size-adjust: none;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+}
+
+// #tinymce {
+//   p,
+//   .p
+//   .paragraph {
+//     margin: 0;
+//     margin-block-end: 0;
+//     margin-block-start: 0;
+//   }
+
+//   li {
+//     font-size: 1.5rem;
+//   }
+// }
+
+.mce-content-body {
+  background-color: #cdcdcd;
+}

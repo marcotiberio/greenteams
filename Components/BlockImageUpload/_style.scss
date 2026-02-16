@@ -1,0 +1,20 @@
+flynt-component[name='BlockImageUpload'] {
+  #container {
+    height: 640px; /* Adjust height as needed */
+    overflow: hidden; /* Hide overflow to ensure a consistent display */
+    position: relative;
+    width: 640px; /* Adjust width as needed */
+  }
+
+  #overlay {
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+  }
+  
+  #image {
+    height: auto;
+    max-width: 100%;
+  }
+}

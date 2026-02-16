@@ -1,0 +1,41 @@
+<flynt-component 
+  load:on="visible" 
+  name="BlockVideoText" 
+  style="
+    color: {% if options.colorText %}{{ options.colorText }}{% else %}var(--black){% endif %};
+    background-color: {% if options.colorBackground %}{{ options.colorBackground }}{% else %}transparent{% endif %};">
+  <div class="wrapper max-w-screen-max mx-auto lg:aspect-[16/4.5] h-full">
+    <div class="flex flex-col {{ videoPosition }} items-stretch h-full">
+      <div class="w-auto lg:w-1/2 lg:absolute {% if videoPosition == 'lg:flex-row' %} left-0 {% else %} right-0 {% endif %} h-full">
+        {% if oembed %}
+        <div class="video w-full h-full">
+          {# {% include 'Partials/_figure.twig' ignore missing with {image: posterImage} only %} #}
+          <div data-ref="videoPlayer" class="video-player w-full h-full mx-auto" data-state="isLoaded">
+            {{ oembed }}
+            <div class="video-loader"></div>
+            <button data-ref="playButton" class="video-playButton" type="button" aria-label="Play Video"></button>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      <div class="w-full lg:w-1/2 h-full flex flex-col justify-between boxed {% if videoPosition == 'lg:flex-row' %} !mr-0 {% else %} !ml-0 {% endif %}">
+        {% if contentHtml %}
+          <div class="wysiwyg">{{ contentHtml|e('wp_kses_post') }}</div>
+        {% endif %}
+        {% for panel in repeaterButtons %}
+          <div class="flex flex-col gap-sm mt-sm">
+            <a class="button button--outline button--outlineBig" href="{{panel.buttonLink.url}}" {% if panel.buttonLink.target %} target="{{ panel.buttonLink.target }}" rel="noreferrer noopener"{% endif %}>{{panel.buttonLink.title}}</a>
+          </div>
+        {% endfor %}
+        <div class="flex flex-row gap-xs mt-sm">
+          {% if buttonLink1 %}
+            <a class="button button--outline" href="{{buttonLink1.url}}" {% if buttonLink1.target %} target="{{ buttonLink1.target }}" rel="noreferrer noopener"{% endif %}>{{buttonLink1.title}}</a>
+          {% endif %}
+          {% if buttonLink2 %}
+            <a class="button button--fullBlack" href="{{buttonLink2.url}}" {% if buttonLink2.target %} target="{{ buttonLink2.target }}" rel="noreferrer noopener"{% endif %}>{{buttonLink2.title}}</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</flynt-component>

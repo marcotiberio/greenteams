@@ -1,0 +1,29 @@
+<ul data-ref="menu" class="menu w-full h-full">
+  <div class="w-full h-full mx-auto flex flex-col gap-sm justify-start">
+    {% for item in items %}
+      {# regular menu item #}
+      {% if not item.children %}
+        <li class="item {{- item.current ? ' current-menu-item' }}">
+          <a class="link font-menuFooter hover:underline" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' }}>
+            {{ item.title }}
+          </a>
+        </li>
+      {% endif %}
+      {# menu with submenu item #}
+      {% if item.children %}
+        <li class="item open-submenu {{- item.current ? ' current-menu-item' }}" >
+          <div class="link font-menuFooter underline !mb-[6px]">
+            {{ item.title }}
+          </div>
+          <ul class="submenu flex flex-row gap-xs">
+            {% for subitem in item.children %}
+              <li class="item hover:underline {{- subitem.current ? ' current-menu-item' }}">
+                <a class="link !p-0 font-menuFooter" href="{{ subitem.link }}" {{ subitem.target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' }}>{{ subitem.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endif %}
+    {% endfor %}
+  <div>
+</ul>

@@ -1,0 +1,62 @@
+<flynt-component load:on="visible" name="NavigationFooter" class="bg-white">
+  <div class="w-full mx-auto boxed !py-sm flex flex-row justify-between items-end">
+    <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-sm md:gap-lg">
+      {# Column Left #}
+      <div class="flex flex-col justify-start gap-sm">
+        <div class="w-full h-full flex flex-col gap-sm justify-start">
+          {% if menu %}
+            <nav class="navigation w-full h-full flex justify-start md:justify-center items-end" aria-label="{{ labels.ariaLabel }}">
+              {% include 'Partials/_menu.twig' with { 'items': menu.get_items, 'level': '0', 'maxLevel': maxLevel } only %}
+            </nav>
+          {% endif %}
+        </div>
+      </div>
+      {# Column Center #}
+      <div class="flex flex-col justify-start gap-sm">
+        {% if headlineTitle %}
+          <div class="w-full mx-auto flex justify-center items-center text-center font-smallTitle {% if options.addBorderTop %}border-t{% endif %}">
+            {{ headlineTitle }}
+          </div>
+        {% endif %}
+        {% if options.textContent %}
+          <div class="w-full flex flex-col justify-start wysiwyg">
+            {{ options.textContent|e('wp_kses_post') }}
+          </div>
+        {% endif %}
+        <div class="w-full flex flex-col justify-start uppercase">
+          {{ copyrights|e('wp_kses_post') }}
+        </div>
+        <div class="w-full mx-auto flex flex-row gap-sm">
+          {% for item in items %}
+            <div class="flex flex-col">
+              {% if item.image %}
+                <a class="" href="{{ item.imageLink.url }}"{% if item.imageLink.target %} target="{{ item.imageLink.target }}" rel="noreferrer noopener"{% endif %}>
+                  <figure class="figure w-full">
+                    <img class="lazyload w-full h-[80px] mx-auto object-contain"
+                      src="{{ item.image.src }}"
+                      data-srcset="{{function('wp_get_attachment_image_srcset', item.image.id)}}"
+                      data-sizes="auto"
+                      alt="{{ item.image.alt|e }}">
+                  </figure>
+                </a>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      {# Column Right #}
+      <div class="flex flex-col justify-between gap-sm">
+        {% if partnersImage %}
+          <figure class="figure w-full">
+            <img class="lazyload w-full mx-auto object-contain"
+              src="{{ partnersImage.src | resize(32) }}"
+              data-srcset="{{function('wp_get_attachment_image_srcset', partnersImage.id)}}"
+              data-sizes="auto"
+              alt="{{ partnersImage.alt|e }}">
+          </figure>
+        {% endif %}
+      </div>
+      {# {% include 'Partials/_backtotop.twig' %} #}
+    </div>
+  </div>
+</flynt-component>

@@ -1,0 +1,244 @@
+<flynt-component 
+  load:on="visible" 
+  name="BlockImageUpload boxed">
+  <div class="boxed w-full bg-white flex flex-col justify-center items-center">
+    <div class="flex flex-col md:flex-row align-start justify-start md:justify-between gap-md">
+      {# Content column #}
+      <div class="w-full lg:w-1/2 h-full flex flex-col justify-between">
+        {% if contentHtml %}
+          <div class="wysiwyg">{{ contentHtml|e('wp_kses_post') }}</div>
+        {% endif %}
+      </div>
+      {# Upload column #}
+      <div class="w-full lg:w-1/2 flex flex-col gap-sm">
+        {% if explanationText %}
+          <div class="font-body !mb-0">{{ explanationText|e('wp_kses_post') }}</div>
+        {% endif %}
+
+        {# Color selector #}
+        {% if selectionText %}
+          <div class="w-full flex flex-col gap-xs">
+            <div class="font-body !mb-0">{{ selectionText|e }}</div>
+            <div id="colorSelector" class="flex flex-row gap-xs flex-wrap">
+              <button class="color-option w-8 h-8 rounded-full transition-all" data-color="var(--green)" style="background-color: var(--green);" title="Green"></button>
+              <button class="color-option w-8 h-8 rounded-full transition-all" data-color="var(--blue)" style="background-color: var(--blue);" title="Blue"></button>
+              <button class="color-option w-8 h-8 rounded-full transition-all" data-color="var(--yellow)" style="background-color: var(--yellow);" title="Yellow"></button>
+              <button class="color-option w-8 h-8 rounded-full transition-all" data-color="var(--orange)" style="background-color: var(--orange);" title="Orange"></button>
+            </div>
+          </div>
+        {% endif %}
+        
+        <figure class="figure figureImage w-full flex flex-col justify-center items-center gap-xs">
+          <!-- Hidden preload container -->
+          <div class="hidden">
+            <img id="uploadedImage" />
+            <img id="overlayImage" src="/wp-content/uploads/2025/10/frame.png" crossorigin="anonymous" />
+          </div>
+
+          <!-- Canvas for rendering -->
+          <div class="w-full h-full relative flex flex-row justify-center items-center">
+            <div id="uploadArea" class="w-full h-[400px] border-3 flex justify-center items-center">
+              <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.9984 15.9998L6.9984 2.00028M6.9984 2.00028L0.882812 8.61171M6.9984 2.00028L13.114 8.61171" stroke="#303030" stroke-width="1.74731"/>
+              </svg>
+            </div>
+            <canvas id="compositionCanvas" class="hidden top-0 left-0 z-50 w-full max-w-[400px] h-[400px] border-3"></canvas>
+          </div>
+          <div class="flex flex-row gap-[5px] justify-between items-end w-full">
+            <input type="file" id="uploadInput" class="hidden" />
+            <button id="uploadBtn" class="flex flex-row gap-[5px] items-center button button--outline button--outlineNoArrow [&_path]:hover:stroke-white">
+              {{ uploadButtonText }}
+              <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.9984 15.9998L6.9984 2.00028M6.9984 2.00028L0.882812 8.61171M6.9984 2.00028L13.114 8.61171" stroke="#303030" stroke-width="1.74731"/>
+              </svg>
+            </button>
+            <button class="flex flex-row gap-[5px] items-center button button--outline button--outlineNoArrow [&_path]:hover:stroke-white" id="downloadBtn">
+              {{ downloadButtonText }}
+              <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.11488 0.484375L7.11488 15.5158M7.11488 15.5158L13.2305 8.90438M7.11488 15.5158L0.999285 8.90438" stroke="#303030" stroke-width="1.74731"/>
+              </svg>
+            </button>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+<style>
+  .color-option.active {
+    border-color: var(--black) !important;
+    border-width: 2px;
+  }
+  
+  .color-option {
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  const uploadInput = document.getElementById('uploadInput');
+  const uploadBtn = document.getElementById('uploadBtn');
+  const overlayImage = document.getElementById('overlayImage');
+  const canvas = document.getElementById('compositionCanvas');
+  const uploadArea = document.getElementById('uploadArea');
+  const previewImage = document.getElementById('previewImage');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const colorSelector = document.getElementById('colorSelector');
+
+  const uploadedImage = new Image();
+  uploadedImage.crossOrigin = "anonymous";
+
+  let selectedColor = null; // Will be set from first color button
+
+  // Helper function to resolve CSS variables
+  function resolveCSSVariable(colorValue) {
+    if (colorValue.startsWith('var(')) {
+      // Extract variable name from var(--name)
+      const varName = colorValue.match(/var\((--[\w-]+)\)/)[1];
+      // Get computed value from root element
+      return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    }
+    return colorValue;
+  }
+
+  // Color selector event listeners
+  if (colorSelector) {
+    const colorButtons = colorSelector.querySelectorAll('.color-option');
+    
+    // Set first button as active and selected by default
+    if (colorButtons.length > 0) {
+      colorButtons[0].classList.add('active');
+      const firstColorValue = colorButtons[0].getAttribute('data-color');
+      selectedColor = resolveCSSVariable(firstColorValue);
+    }
+    
+    colorButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Update active state
+        colorButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Update selected color and resolve CSS variables
+        const colorValue = button.getAttribute('data-color');
+        selectedColor = resolveCSSVariable(colorValue);
+        
+        // Redraw if image is already loaded
+        if (uploadedImage.src && uploadedImage.complete) {
+          drawComposition();
+        }
+      });
+    });
+  }
+
+  uploadBtn.addEventListener('click', () => {
+    uploadInput.click(); // Triggers the hidden file input
+  });
+
+  uploadInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      uploadedImage.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  uploadedImage.onload = () => {
+    if (overlayImage.complete && overlayImage.naturalWidth) {
+      drawComposition();
+    } else {
+      overlayImage.onload = drawComposition;
+    }
+  };
+
+  function drawComposition() {
+    const canvasWidth = overlayImage.naturalWidth;
+    const canvasHeight = overlayImage.naturalHeight;
+
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    canvas.classList.remove('hidden');
+    uploadArea.classList.add('hidden');
+
+    const ctx = canvas.getContext('2d');
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    // Draw uploaded image at top-left at original size (no stretching)
+    // Scale uploaded image to match overlay's width, keep aspect ratio
+    const scale = canvas.width / uploadedImage.naturalWidth;
+    const scaledWidth = canvas.width;
+    const scaledHeight = uploadedImage.naturalHeight * scale;
+
+    ctx.drawImage(uploadedImage, 0, 0, scaledWidth, scaledHeight);
+
+    // Draw overlay image with color filter
+    if (selectedColor) {
+      // Create a temporary canvas to apply color filter
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = canvasWidth;
+      tempCanvas.height = canvasHeight;
+      const tempCtx = tempCanvas.getContext('2d');
+      
+      // Draw overlay on temp canvas
+      tempCtx.drawImage(overlayImage, 0, 0, canvasWidth, canvasHeight);
+      
+      // Get image data to apply color filter
+      const imageData = tempCtx.getImageData(0, 0, canvasWidth, canvasHeight);
+      const data = imageData.data;
+      
+      // Parse selected color
+      const hexToRgb = (hex) => {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        } : null;
+      };
+      
+      const color = hexToRgb(selectedColor);
+      
+      if (color) {
+        // Apply color uniformly while preserving alpha
+        for (let i = 0; i < data.length; i += 4) {
+          const alpha = data[i + 3];
+          if (alpha > 0) {
+            // Apply the selected color at full intensity
+            data[i] = color.r;     // Red
+            data[i + 1] = color.g; // Green
+            data[i + 2] = color.b; // Blue
+            // Alpha stays the same
+          }
+        }
+        
+        tempCtx.putImageData(imageData, 0, 0);
+      }
+      
+      // Draw the colored overlay onto main canvas
+      ctx.drawImage(tempCanvas, 0, 0, canvasWidth, canvasHeight);
+    } else {
+      // No color selected, draw overlay as-is
+      ctx.drawImage(overlayImage, 0, 0, canvasWidth, canvasHeight);
+    }
+
+    // Optional preview
+    const finalImage = canvas.toDataURL('image/png');
+    if (previewImage) {
+      previewImage.src = finalImage;
+    }
+  }
+
+  downloadBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.download = 'sharepic-greenteams.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+</script>
+</flynt-component>
+
+  

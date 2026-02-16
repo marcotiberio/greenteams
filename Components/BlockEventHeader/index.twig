@@ -1,0 +1,47 @@
+<flynt-component 
+  load:on="visible" name="BlockEventHeader" 
+  class="w-full mx-auto flex flex-col justify-between items-center">
+
+  <div class="wrapper max-w-screen-max mx-auto">
+    <div class="flex flex-col items-stretch min-h-[550px] h-full">
+      <div class="w-auto lg:w-1/2 lg:absolute right-0 min-h-[550px] h-full" style="background-image: url('{{ post.thumbnail.src }}'); background-size: cover; background-position: center;">
+      </div>
+      <div class="w-full lg:w-1/2 h-full flex flex-col justify-between gap-md boxed !ml-0">
+        <div class="flex flex-col justify-start gap-xs">
+          <!-- Recurring Event -->
+          {% if post.is_recurring == 1 %}
+            {% if post.recurringEventDetails %}
+              <span class="font-label">{{ post.recurringEventDetails }}</span>
+            {% endif %}
+          {% endif %}
+          <!-- Non-Recurring Event -->
+          {% if post.is_recurring == 0 %}
+          <div class="w-full flex flex-row gap-[5px]">
+            <div class="w-fit">
+              {% if post.start_date %}
+                <span class="font-label">{{ post.start_date|date("d.m.")|escape('wp_kses_post') }} - </span>
+              {% endif %}
+              {% if post.end_date %}
+                <span class="font-label">{{ post.end_date|date("d.m.")|escape('wp_kses_post') }}</span>
+              {% endif %}
+            </div>
+            {% if post.start_date %}<span class="font-bold">|</span>{% endif %}
+            <div class="w-fit font-label">{{ post.eventTime }}</div>
+          </div>
+          <div class="w-full font-h2 !mb-0">{{ post.title }}</div>
+          {% endif %}
+        </div>
+        <div class="flex flex-col gap-md">
+          <div class="wysiwyg" style="color: {% if options.colorText %}{{ options.colorText }}{% else %}var(--black){% endif %};">
+            {{ post.postIntro }}
+          </div>
+          <div class="flex flex-row gap-xs">
+            {% if post.buttonReserve %}
+              <a class="button button--outline" href="{{ post.buttonReserve.url }}" {% if post.buttonReserve.target %} target="{{ post.buttonReserve.target }}" rel="noreferrer noopener"{% endif %}>{{ post.buttonReserve.title }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</flynt-component>

@@ -1,0 +1,53 @@
+<flynt-component 
+  load:on="idle"
+  {# client:media="(max-width: 1023px)" #}
+  name="NavigationBurger"
+  class="fixed top-0 left-0 w-screen z-50 flex flex-row justify-between mx-auto"  
+  style="background: {% if fn('is_front_page') %} transparent {% else %} {{ post.pageBackground }}; {% endif %}">
+  <nav aria-label="{{ labels.ariaLabel|e }}" class="h-auto w-full">
+    <div class="w-full h-auto max-w-screen-max mx-auto boxed !py-[20px] grid grid-cols-3 lg:gap-sm align-middle items-center z-50 relative">
+      {% include 'Partials/_logo.twig' with { 'logo': logo, 'site': site } only %}
+      {% if menu %}
+        <div class="flex justify-center items-center">
+          {% include 'Partials/_hamburger.twig' with { 'labels': labels } only %}
+        </div>
+      {% endif %}
+      {% include 'Partials/_cta.twig' with { 'ctaMenuItem': ctaMenuItem } only %}
+    </div>
+    {% if menu %}
+      <ul
+        data-ref="menu" 
+        class="menu w-full h-screen !pt-[20vh] z-40 relative" 
+        style="background-color: {% if post.pageBackground %}{{ post.pageBackground }}{% else %}var(--white){% endif %}; ">
+        <div class="w-full h-full max-w-screen-max mx-auto flex flex-col justify-start items-center lg:gap-xs p-xs md:p-sm">
+          {% for item in menu.items %}
+            {# regular menu item #}
+            {% if not item.children %}
+              <li class="item {{- item.current ? ' current-menu-item underline underline-offset-8' }}">
+                <a class="link font-menu uppercase lg:hover:underline underline-offset-8" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' }}>
+                  {{ item.title }}
+                </a>
+              </li>
+            {% endif %}
+            {# menu with submenu item #}
+            {% if item.children %}
+              <li class="item open-submenu {{- item.current ? ' current-menu-item underline underline-offset-8' }}" >
+                <a class="link font-menu uppercase hover:underline underline-offset-8" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' }}>
+                  {{ item.title }}
+                </a>
+                <ul class="submenu">
+                  {% for subitem in item.children %}
+                    <li class="item {{- subitem.current ? ' current-menu-item underline underline-offset-8' }}">
+                      <a class="link !p-0 font-menu uppercase hover:underline underline-offset-8" href="{{ subitem.link }}" {{ subitem.target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' }}>{{ subitem.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endif %}
+          {% endfor %}
+        <div>
+      </ul>
+
+    {% endif %}
+  </nav>
+</flynt-component>

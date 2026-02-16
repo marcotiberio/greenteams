@@ -1,0 +1,40 @@
+<flynt-component 
+  load:on="visible" 
+  name="SliderLogos" 
+  style="
+    background-color: {% if options.colorBackground %}{{ options.colorBackground }}{% else %}transparent{% endif %};"
+  >
+  <script type="application/json">{{ jsonData|json_encode }}</script>
+   <div class="boxed !pb-md flex flex-col gap-md justify-center overflow-hidden">
+    {% if introLogosHtml %}
+      <div class="font-h3 [&_*]:mb-0 w-full md:w-1/2 mx-auto text-center">{{ introLogosHtml|e('wp_kses_post') }}</div>
+    {% endif %}
+    <div data-ref="slider" class="slider swiper-container">
+      {# <div class="hidden md:flex button-wrapper absolute bottom-[calc(50%_-_15px)] w-full align-middle justify-between z-[40]">
+        <button type="button" data-ref="prev" class="slider-button slider-button--prev">
+          <svg width="42" height="30" viewBox="0 0 42 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="fill-black" d="M42 15L3 15M3 15L17.3103 28M3 15L17.3103 2" stroke="#303030" stroke-width="4"/>
+          </svg> 
+        </button>
+        <button type="button" data-ref="next" class="slider-button slider-button--next">
+          <svg width="42" height="30" viewBox="0 0 42 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="fill-black" d="M0 15L39 15M39 15L24.6897 2M39 15L24.6897 28" stroke="#303030" stroke-width="4"/>
+          </svg>
+        </button>
+      </div> #}
+      <div data-ref="dots" class="flex justify-center absolute !bottom-[-10px] lg:!bottom-[-20px] z-[40] slider-pagination swiper-pagination-fraction"></div>
+      <div class="swiper-wrapper flex flex-row items-center">
+        {% for item in logos %}
+          <div class="slider-item swiper-slide w-full h-full flex items-center justify-center">
+            <div class="item w-full flex justify-center">
+              <img class="figure-image lazyload w-full max-w-[200px] h-full object-contain"
+                src="{{ item.logo.src }}"
+                data-srcset="{{function('wp_get_attachment_image_srcset', item.logo.id)}}"
+                data-sizes="auto">
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</flynt-component>

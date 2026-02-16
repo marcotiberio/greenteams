@@ -1,0 +1,75 @@
+flynt-component[name='blockGalleryEvent'] {
+  height: auto;
+  scroll-margin-top: 96px;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding: var(--spacingLarge) var(--spacingLarge) 0;
+  }
+
+  .wrapper {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--spacingSmall);
+    margin-block-start: 0;
+    padding-bottom: var(--spacingSmall);
+
+    @media (min-width: $breakpoint-mobile + 1) {
+      gap: var(--spacingLarge);
+      padding-bottom: var(--spacingLarge);
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+      gap: var(--spacingLarge);
+      padding-bottom: var(--spacingLarge);
+    }
+  }
+
+  .box {
+    align-items: flex-start;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    transition: all 0.2s linear;
+
+    @media (min-width: $breakpoint-mobile + 1) {
+      margin-bottom: var(--spacingLarge);
+      width: 45%;
+    }
+
+    &-inner {
+      height: 100%;
+      position: relative;
+      text-align: center;
+      transition: transform 0.2s linear;
+      width: 100%;
+
+      &--image {
+        figure {
+          height: 100%;
+          margin: 0;
+
+          img {
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+
+      &--content {
+        align-items: flex-start;
+        flex-flow: column;
+        justify-content: space-between;
+        padding: var(--spacingSmall) 0;
+        text-align: left;
+        transition: all 0.2s linear;
+        width: 100%;
+
+        @media (max-width: $breakpoint-desktop - 1) {
+          display: flex;
+          position: relative;
+        }
+      }
+    }
+  }
+}

@@ -30,6 +30,16 @@ add_action('Flynt/afterRegisterComponents', function () {
                 ]
             ],
             [
+                'label' => __('Redirect URL', 'flynt'),
+                'instructions' => __('If set, this post will redirect to this URL instead of displaying its content.', 'flynt'),
+                'name' => 'redirectUrl',
+                'type' => 'url',
+                'required' => 0,
+                'wrapper' => [
+                    'width' => 100
+                ],
+            ],
+            [
                 'label' => __('Reserve Button', 'flynt'),
                 'name' => 'buttonReserve',
                 'type' => 'link',

@@ -1,24 +1,65 @@
 <?php
 
-namespace Flynt;
-
 /**
- * Tutor LMS Integration
- * 
- * Ensures Tutor LMS uses the Flynt header.php template
- * The header.php file in the theme root will be used by Tutor's get_header() call
- * 
- * This file ensures proper integration between Tutor and Flynt theme
+ * TutorLMS Integration
+ *
+ * TutorLMS initializes TinyMCE via JavaScript (wp.editor.initialize) bypassing
+ * WordPress PHP filters. This injects a script that overrides the toolbar config
+ * for all TinyMCE instances on TutorLMS pages.
  */
 
-// Ensure Tutor uses our header.php template
-add_action('template_redirect', function() {
-    // Only apply to Tutor pages
-    if (!function_exists('tutor_utils')) {
+namespace Flynt\TutorIntegration;
+
+add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueueTutorEditorOverride');
+add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\enqueueTutorEditorOverride');
+add_action('wp_footer', __NAMESPACE__ . '\\tutorDashboardLabelOverrides');
+
+function enqueueTutorEditorOverride()
+{
+    if (!function_exists('tutor')) {
         return;
     }
-    
-    // Tutor's tutor_custom_header() calls get_header() for non-block themes
-    // Our header.php will be automatically used by WordPress's get_header() function
-    // No additional action needed here - WordPress will find header.php automatically
-}, 1);
+
+    $config = \Flynt\TinyMce\getConfig();
+
+    $blockFormats = \Flynt\TinyMce\getBlockFormats($config['blockformats']);
+    $styleFormats = json_encode($config['styleformats']);
+    $textcolorMap = json_encode($config['textcolor_map']);
+    $toolbar1 = implode(',', $config['toolbars']['default'][0]);
+
+    wp_add_inline_script('wp-tinymce', "
+        (function() {
+            if (typeof tinymce === 'undefined') return;
+
+            tinymce.on('AddEditor', function(e) {
+                var editor = e.editor;
+
+                editor.settings.toolbar1 = " . json_encode($toolbar1) . ";
+                editor.settings.toolbar2 = '';
+                editor.settings.block_formats = " . json_encode($blockFormats) . ";
+                editor.settings.style_formats = " . $styleFormats . ";
+                editor.settings.textcolor_map = " . $textcolorMap . ";
+            });
+        })();
+    ");
+}
+
+function tutorDashboardLabelOverrides()
+{
+    if (!function_exists('tutor')) {
+        return;
+    }
+    ?>
+    <script>
+        (function() {
+            var row = document.querySelector('.tutor-dashboard-profile-data .tutor-row:nth-child(7)');
+            if (row) {
+                var label = row.querySelector('.tutor-fs-6.tutor-color-secondary');
+                if (label) {
+                    label.textContent = 'Organisation/Position';
+                }
+            }
+        })();
+    </script>
+    <?php
+}

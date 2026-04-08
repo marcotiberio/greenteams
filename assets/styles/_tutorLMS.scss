@@ -45,6 +45,10 @@
     @apply border-0 !important;
     @apply rounded-none !important;
   }
+
+  .tutor-course-thumbnail {
+    @apply max-w-[40vw] !important;
+  }
   
 
   .tutor-btn-primary {
@@ -92,6 +96,272 @@
       font-size: 23px;
       @apply relative;
       @apply bottom-[2px];
+    }
+  }
+}
+
+.single-lesson {
+  @apply pt-[70px];
+
+  .tutor-lesson-wrapper {
+    p {
+      @apply leading-[1.7];
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0 0 1.2rem;
+      // padding-left: 1rem;
+    
+      ul {
+        list-style-type: none;
+        margin-bottom: 0;
+    
+        li {
+          font-size: 1.25rem;
+          line-height: inherit;
+          margin-left: 1rem;
+          text-indent: -1rem;
+
+          @media (min-width: $breakpoint-desktop) {
+            font-size: 1.25rem;
+          }
+
+          a {
+            color: var(--green);
+            @apply hover:underline;
+            @apply hover:underline-offset-[5px];
+          }
+
+          &::before { 
+            content: '•';
+            @apply mr-[10px];
+          }
+        }
+      }
+    
+      li {
+        font-size: 1.25rem;
+        line-height: inherit;
+        margin-left: 1rem;
+        text-indent: -1rem;
+
+        @media (min-width: $breakpoint-desktop) {
+          font-size: 1.25rem;
+        }
+
+        a {
+          color: var(--green);
+          @apply hover:underline;
+          @apply hover:underline-offset-[5px];
+        }
+
+        &::before { 
+          content: '•';
+          @apply mr-[10px];
+        }
+      }
+    }
+
+    .button {
+      @include reset-link;
+      appearance: none;
+      font-family: 'PlusJakartaSansBold';
+      letter-spacing: 0.5px;
+      line-height: 1;
+      @apply w-fit;
+      @apply text-button;
+      @apply flex;
+      @apply justify-center;
+      @apply items-center;
+      @apply cursor-pointer;
+      @apply px-[20px];
+      @apply py-[10px];
+      @apply relative;
+      @apply text-center;
+      @apply uppercase;
+      @apply no-underline;
+      @apply hover:no-underline;
+      @apply tracking-wide;
+
+      &:disabled {
+        cursor: default;
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      &--fullBlack {
+        @apply text-white;
+        @apply bg-black;
+        @apply justify-center;
+        @apply gap-xs;
+        @apply border-2;
+        @apply border-transparent;
+
+        &:hover,
+        &:focus {
+          color: var(--black) !important;
+          @apply bg-transparent;
+          @apply border;
+          @apply border-black;
+
+          &::after {
+            color: var(--black) !important;
+          }
+        }
+
+        &::after {
+          content: '→';
+          font-family: 'PlusJakartaSans';
+          font-size: 23px;
+          @apply relative;
+          @apply bottom-[2px];
+        }
+      }
+
+      &--fullGreen {
+        @apply text-green;
+        @apply bg-white;
+        @apply justify-center;
+        @apply gap-xs;
+        @apply border;
+        @apply border-green;
+
+        &:hover,
+        &:focus {
+          @apply text-green;
+          @apply bg-transparent;
+          @apply border;
+          @apply border-green;
+        }
+      }
+
+      &--fullBlue {
+        @apply text-blue;
+        @apply bg-white;
+        @apply justify-center;
+        @apply gap-xs;
+        @apply border;
+        @apply border-blue;
+
+        &:hover,
+        &:focus {
+          @apply text-blue;
+          @apply bg-transparent;
+          @apply border;
+          @apply border-blue;
+        }
+      }
+
+      &--fullOrange {
+        @apply text-orange;
+        @apply bg-white;
+        @apply justify-center;
+        @apply gap-xs;
+        @apply border;
+        @apply border-orange;
+
+        &:hover,
+        &:focus {
+          @apply text-orange;
+          @apply bg-transparent;
+          @apply border;
+          @apply border-orange;
+        }
+      }
+
+      &--outline {
+        @apply text-black;
+        @apply bg-transparent;
+        @apply justify-center;
+        @apply gap-xs;
+        @apply border-2;
+        @apply border-black;
+
+        &:hover,
+        &:focus {
+          color: var(--white) !important;
+          @apply bg-black;
+
+          &::after {
+            color: var(--white) !important;
+          }
+        }
+
+        &::after {
+          content: '→';
+          font-family: 'PlusJakartaSans';
+          font-size: 23px;
+          @apply relative;
+          @apply bottom-[2px];
+        
+        }
+
+        &Big {
+          @apply px-[22px];
+          @apply py-[14px];
+          @apply capitalize;
+          @apply font-[500];
+          font-family: 'PlusJakartaSans';
+          @apply text-[1.6rem];
+          @apply lg:text-[1.938rem];
+          @apply w-full;
+          @apply flex;
+          @apply flex-row;
+          @apply justify-between;
+          @apply items-center;
+          @apply text-left;
+
+          &::after {
+            content: '→';
+            font-family: 'PlusJakartaSans';
+            font-size: 34px;
+            @apply relative;
+            @apply bottom-[5px];
+          }
+        }
+
+        &NoArrow {
+          &::after {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+
+  .tutor-course-single-sidebar-wrapper {
+    @apply max-w-[300px];
+    @apply bg-[#fff];
+  }
+}
+
+.tutor-screen-frontend-dashboard {
+  @apply pt-[20px];
+  @apply bg-beige;
+
+  .tutor-container {
+    @apply w-full;
+    @apply max-w-screen-max;
+    @apply mx-auto;
+    @apply px-xs;
+    @apply py-sm;
+    @apply sm:p-sm;
+    @apply md:p-md;
+  }
+
+  .tutor-dashboard-permalinks {
+    .tutor-dashboard-menu-my-quiz-attempts,
+    .tutor-dashboard-menu-purchase_history,
+    .tutor-dashboard-menu-question-answer   {
+      @apply hidden;
+    }
+  }
+
+  .tutor-dashboard-profile-data {
+    .tutor-row:nth-child(6),
+    .tutor-row:nth-child(8) {
+      @apply hidden;
     }
   }
 }

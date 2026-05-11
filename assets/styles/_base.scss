@@ -301,6 +301,49 @@ blockquote,
       }
     }
   }
+
+  ol {
+    list-style-type: decimal-leading-zero;
+    margin: 0 0 1.2rem;
+    padding-left: 1rem;
+  
+    ol {
+      list-style-type: decimal-leading-zero;
+      margin-bottom: 0;
+  
+      li {
+        font-size: 1.25rem;
+        line-height: inherit;
+        margin-left: 1rem;
+
+        @media (min-width: $breakpoint-desktop) {
+          font-size: 1.25rem;
+        }
+
+        a {
+          color: var(--green);
+          @apply hover:underline;
+          @apply hover:underline-offset-[5px];
+        }
+      }
+    }
+  
+    li {
+      font-size: 1.25rem;
+      line-height: inherit;
+      margin-left: 1rem;
+
+      @media (min-width: $breakpoint-desktop) {
+        font-size: 1.25rem;
+      }
+
+      a {
+        color: var(--green);
+        @apply hover:underline;
+        @apply hover:underline-offset-[5px];
+      }
+    }
+  }
 }
 
 table {

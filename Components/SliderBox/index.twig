@@ -9,7 +9,7 @@
   <div class="wrapper w-screen mx-auto boxed">
     <div class="w-full max-w-screen-max mx-auto flex flex-col md:flex-row {% if buttonLink %} justify-between {% else %} justify-start {% endif %} items-center gap-sm md:gap-xxl">
       {% if title %}
-        <div class="h2 w-full max-w-[450px]">{{ title }}</div>
+        <div class="h2 w-full {% if contentHtml %}max-w-[450px]{% endif %}">{{ title }}</div>
       {% endif %}
       {% if contentHtml %}
         <div class="wysiwyg [&_*]:mb-0 w-full max-w-[450px]">{{ contentHtml|e('wp_kses_post') }}</div>
@@ -57,7 +57,7 @@
                   <h3 class="">{{ box.title }}</h3>
                 {% endif %}
                 {% if box.text %}
-                  <div class="">{{ box.text }}</div>
+                  <div class="">{{ box.text|e('wp_kses_post') }}</div>
                 {% endif %}
               </div>
             </div>

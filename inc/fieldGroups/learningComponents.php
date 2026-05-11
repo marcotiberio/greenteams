@@ -122,6 +122,7 @@ add_action('Flynt/afterRegisterComponents', function () {
                     Components\BlockCollapse\getACFLayout(),
                     Components\BlockImage\getACFLayout(),
                     Components\BlockImageText\getACFLayout(),
+                    Components\BlockVideoText\getACFLayout(),
                     Components\BlockVideoOembed\getACFLayout(),
                     Components\BlockIframe\getACFLayout(),
                     Components\BlockWysiwyg\getACFLayout(),

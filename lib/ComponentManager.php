@@ -122,7 +122,7 @@ class ComponentManager
         foreach ($this->components as $componentName => $componentPath) {
             $componentPath = str_replace('/dist/', '/', $componentPath);
             $relativeComponentPath = trim(str_replace(get_template_directory() . '/Components/', '', $componentPath), '/');
-            if (file_exists($componentPath . '/script.js')) {
+            if (file_exists($componentPath . '/script.ts') || file_exists($componentPath . '/script.js')) {
                 $componentsWithScripts[$componentName] = $relativeComponentPath;
             }
         }

@@ -85,7 +85,11 @@ function getACFLayout()
                     [
                         'label' => __('Text', 'flynt'),
                         'name' => 'text',
-                        'type' => 'textarea',
+                        'type' => 'wysiwyg',
+                        'tabs' => 'visual',
+                        'delay' => 1,
+                        'media_upload' => 0,
+                        'required' => 0,
                     ],
                     [
                         'label' => __('Button', 'flynt'),

@@ -10,7 +10,7 @@
   },
   "Components/BlockCta/Assets/facebook.svg": {
     "file": "assets/facebook-8975c208.svg",
-    "src": "Components/BlockCta/Assets/facebook.svg"
+    "src": "Components/BlockCta/Assets/linkedin.svg"
   },
   "Components/BlockCta/Assets/instagram.svg": {
     "file": "assets/instagram-5bab2c82.svg",
@@ -18,7 +18,7 @@
   },
   "Components/BlockCta/Assets/linkedin.svg": {
     "file": "assets/facebook-8975c208.svg",
-    "src": "Components/BlockCta/Assets/facebook.svg"
+    "src": "Components/BlockCta/Assets/linkedin.svg"
   },
   "Components/BlockCta/Assets/logo.svg": {
     "file": "assets/logo-eeb7436e.svg",
@@ -47,7 +47,7 @@
     "src": "Components/BlockProductSpecs/script.js"
   },
   "Components/BlockVideoOembed/script.js": {
-    "file": "assets/script-8850fc2e.js",
+    "file": "assets/script-f9ad060b.js",
     "imports": [
       "_helpers-eb6ff3c9.js"
     ],
@@ -100,7 +100,7 @@
     "src": "Components/HeroSliderComposite/script.js"
   },
   "Components/HeroVideoBackground/script.js": {
-    "file": "assets/script-f9ad060b.js",
+    "file": "assets/script-8850fc2e.js",
     "imports": [
       "_helpers-eb6ff3c9.js"
     ],

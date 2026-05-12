@@ -30,7 +30,7 @@
       @click="{% if options.closeOnBackdrop is not same as(false) %}close(){% endif %}"
       aria-hidden="true"></div>
     <div
-      class="relative w-full max-w-screen-lg md:aspect-16/6 overflow-hidden shadow-xl"
+      class="relative w-full max-w-screen-lg overflow-hidden shadow-xl"
       style="
         color: {% if options.colorText %}{{ options.colorText }}{% else %}var(--blue){% endif %};">
       <button
@@ -45,7 +45,7 @@
       </button>
       <div class="boxed !p-0 bg-white h-full">
         <div class="flex flex-col {{ imagePosition }} items-stretch h-full">
-          <div class="w-full lg:w-1/2 h-full overflow-hidden" style="background-color: {% if options.colorBackground %}{{ options.colorBackground }}{% else %}var(--orange){% endif %};">
+          <div class="w-full lg:w-1/2 overflow-hidden" style="background-color: {% if options.colorBackground %}{{ options.colorBackground }}{% else %}var(--orange){% endif %};">
             {% if image %}
               {% set imageFit = (image.src|lower ends with '.svg') ? 'object-contain p-sm' : 'object-cover' %}
               <figure class="figure h-full">
@@ -54,9 +54,6 @@
                   data-srcset="{{ function('wp_get_attachment_image_srcset', image.id) }}"
                   data-sizes="auto"
                   alt="{{ image.alt|e }}">
-                {% if image.caption %}
-                  <figcaption class="font-bodySmall">{{ image.caption|e }}</figcaption>
-                {% endif %}
               </figure>
             {% endif %}
           </div>
@@ -66,7 +63,7 @@
             {% endif %}
             <div class="flex flex-row gap-xs">
               {% if buttonNewsletter %}
-                <a class="button button--link" href="{{ buttonNewsletter.url }}" {% if buttonNewsletter.target %} target="{{ buttonNewsletter.target }}" rel="noreferrer noopener"{% endif %} @click="close()">{{ buttonNewsletter.title }}</a>
+                <a class="button button--outline" href="{{ buttonNewsletter.url }}" {% if buttonNewsletter.target %} target="{{ buttonNewsletter.target }}" rel="noreferrer noopener"{% endif %} @click="close()">{{ buttonNewsletter.title }}</a>
               {% endif %}
             </div>
           </div>

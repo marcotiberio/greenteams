@@ -10,7 +10,7 @@
   },
   "Components/BlockCta/Assets/facebook.svg": {
     "file": "assets/facebook-8975c208.svg",
-    "src": "Components/BlockCta/Assets/linkedin.svg"
+    "src": "Components/BlockCta/Assets/facebook.svg"
   },
   "Components/BlockCta/Assets/instagram.svg": {
     "file": "assets/instagram-5bab2c82.svg",
@@ -18,7 +18,7 @@
   },
   "Components/BlockCta/Assets/linkedin.svg": {
     "file": "assets/facebook-8975c208.svg",
-    "src": "Components/BlockCta/Assets/linkedin.svg"
+    "src": "Components/BlockCta/Assets/facebook.svg"
   },
   "Components/BlockCta/Assets/logo.svg": {
     "file": "assets/logo-eeb7436e.svg",
@@ -307,7 +307,7 @@
     "src": "assets/main.js"
   },
   "assets/main.scss": {
-    "file": "assets/main-d84c7b6a.css",
+    "file": "assets/main-2aa87bc7.css",
     "isEntry": true,
     "src": "assets/main.scss"
   },
@@ -317,7 +317,7 @@
     "src": "assets/print.scss"
   },
   "assets/tinyMce.scss": {
-    "file": "assets/tinyMce-1c3b4a57.css",
+    "file": "assets/tinyMce-c5442073.css",
     "isEntry": true,
     "src": "assets/tinyMce.scss"
   },

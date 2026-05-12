@@ -303,12 +303,12 @@ blockquote,
   }
 
   ol {
-    list-style-type: decimal-leading-zero;
+    list-style-type: decimal;
     margin: 0 0 1.2rem;
     padding-left: 1rem;
   
     ol {
-      list-style-type: decimal-leading-zero;
+      list-style-type: decimal;
       margin-bottom: 0;
   
       li {

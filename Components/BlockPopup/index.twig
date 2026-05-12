@@ -1,0 +1,77 @@
+{% if displayPopup %}
+  {% set popupId = options.popupId|default('default') %}
+  {% set storageKey = 'blockPopup:' ~ popupId %}
+  {% set delayMs = (options.showDelaySeconds|default(0)) * 1000 %}
+  <flynt-component
+    load:on="idle"
+    name="BlockPopup"
+    class="fixed inset-0 z-[9999] flex items-center justify-center p-xs"
+    x-data="{
+      open: false,
+      init() {
+        if (window.localStorage.getItem('{{ storageKey }}') === 'dismissed') return;
+        window.setTimeout(() => { this.open = true; }, {{ delayMs }});
+      },
+      close() {
+        this.open = false;
+        window.localStorage.setItem('{{ storageKey }}', 'dismissed');
+      }
+    }"
+    x-show="open"
+    x-cloak
+    @keydown.escape.window="close()"
+    x-transition.opacity
+    x-effect="document.body.style.overflow = open ? 'hidden' : ''"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="block-popup-{{ popupId }}-label">
+    <div
+      class="absolute inset-0 bg-black/60"
+      @click="{% if options.closeOnBackdrop is not same as(false) %}close(){% endif %}"
+      aria-hidden="true"></div>
+    <div
+      class="relative w-full max-w-screen-lg md:aspect-16/6 overflow-hidden shadow-xl"
+      style="
+        color: {% if options.colorText %}{{ options.colorText }}{% else %}var(--blue){% endif %};">
+      <button
+        type="button"
+        @click="close()"
+        class="absolute top-sm right-sm z-10 flex items-center justify-center w-[50px] h-[50px] rounded-full bg-white text-black hover:bg-black hover:text-white cursor-pointer"
+        aria-label="{{ 'Close'|e }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="boxed !p-0 bg-white h-full">
+        <div class="flex flex-col {{ imagePosition }} items-stretch h-full">
+          <div class="w-full lg:w-1/2 h-full overflow-hidden" style="background-color: {% if options.colorBackground %}{{ options.colorBackground }}{% else %}var(--orange){% endif %};">
+            {% if image %}
+              {% set imageFit = (image.src|lower ends with '.svg') ? 'object-contain p-sm' : 'object-cover' %}
+              <figure class="figure h-full">
+                <img class="figure-image lazyload h-full w-full {{ imageFit }}"
+                  src="{{ image.src | resize(32) }}"
+                  data-srcset="{{ function('wp_get_attachment_image_srcset', image.id) }}"
+                  data-sizes="auto"
+                  alt="{{ image.alt|e }}">
+                {% if image.caption %}
+                  <figcaption class="font-bodySmall">{{ image.caption|e }}</figcaption>
+                {% endif %}
+              </figure>
+            {% endif %}
+          </div>
+          <div class="p-sm w-full lg:w-1/2 h-full min-h-0 overflow-hidden flex flex-col place-items-stretch justify-between gap-sm">
+            {% if contentHtml %}
+              <div id="block-popup-{{ popupId }}-label" class="wysiwyg">{{ contentHtml|e('wp_kses_post') }}</div>
+            {% endif %}
+            <div class="flex flex-row gap-xs">
+              {% if buttonNewsletter %}
+                <a class="button button--link" href="{{ buttonNewsletter.url }}" {% if buttonNewsletter.target %} target="{{ buttonNewsletter.target }}" rel="noreferrer noopener"{% endif %} @click="close()">{{ buttonNewsletter.title }}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </flynt-component>
+{% endif %}

@@ -46,6 +46,24 @@
     @apply rounded-none !important;
   }
 
+  .tutor-course-details-content.tutor-toggle-more-content.tutor-toggle-more-collapsed {
+    height: auto !important;
+    max-height: none !important;
+
+    &::before {
+      content: none !important;
+    }
+  }
+
+  .tutor-toggle-more-btn,
+  .tutor-toggle-more-btn-wrap {
+    @apply hidden !important;
+  }
+
+  .tutor-btn-show-more {
+    @apply hidden !important;
+  }
+
   .tutor-course-thumbnail {
     @apply max-w-[40vw] !important;
   }
@@ -334,6 +352,10 @@
     @apply max-w-[300px];
     @apply bg-[#fff];
   }
+
+  .tutor-video-player-wrapper {
+    @apply max-w-screen-lg mx-auto;
+  }
 }
 
 .tutor-screen-frontend-dashboard {
@@ -353,7 +375,8 @@
   .tutor-dashboard-permalinks {
     .tutor-dashboard-menu-my-quiz-attempts,
     .tutor-dashboard-menu-purchase_history,
-    .tutor-dashboard-menu-question-answer   {
+    .tutor-dashboard-menu-question-answer,
+    .tutor-dashboard-menu-settings  {
       @apply hidden;
     }
   }
@@ -362,6 +385,38 @@
     .tutor-row:nth-child(6),
     .tutor-row:nth-child(8) {
       @apply hidden;
+    }
+  }
+
+  .tutor-table {
+    thead {
+      tr {
+        th {
+          &:nth-child(2) {
+            border-top-right-radius: var(--tutor-table-border-radius);
+            border-right: 1px solid var(--tutor-border-color);
+          }
+
+          &:last-child {
+            @apply hidden;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          &:nth-child(2) {
+            border-bottom-right-radius: var(--tutor-table-border-radius);
+            border-right: 1px solid var(--tutor-border-color);
+          }
+          
+          &:last-child {
+            @apply hidden;
+          }
+        }
+      }
     }
   }
 }

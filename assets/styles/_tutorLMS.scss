@@ -467,7 +467,7 @@
 
   .tutor-container {
     @apply w-full;
-    @apply max-w-screen-max;
+    @apply max-w-screen-max !important;
     @apply mx-auto;
     @apply px-xs;
     @apply py-sm;
@@ -524,8 +524,21 @@
   }
 }
 
-// Make the main content column full width (Tutor defaults it to 66% via .tutor-col-xl-8).
-.tutor-col-xl-8 {
-  flex: 0 0 100% !important;
-  max-width: 100% !important;
+.tutor-course-spotlight-wrapper {
+  .tutor-container {
+    @apply w-full;
+    @apply max-w-screen-max !important;
+    @apply mx-auto;
+    @apply p-0 !important;
+  }
+
+  // Make the main content column full width (Tutor defaults it to 66% via .tutor-col-xl-8).
+  .tutor-col-xl-8 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .tutor-course-spotlight-tab {
+    @apply p-0 !important;
+  }
 }

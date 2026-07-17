@@ -21,14 +21,29 @@ add_filter('tutor_filter_course_archive_page', __NAMESPACE__ . '\\useLernenAsCou
  * where the close (X) button on the password-protected course/bundle template
  * links to, as well as other Tutor "back to courses" links.
  *
+ * Tutor reuses this same filter to identify which page IS the course archive and
+ * then replaces that page's main query with the course loop
+ * (Template::limit_course_query_archive on pre_get_posts). We only want to change
+ * the link target, not turn the Lernen page into an archive listing — so when the
+ * current main query is the Lernen page itself, we return the original value so
+ * Tutor leaves the page's own backend-built content intact.
+ *
  * @param int|string $archive_page_id Currently configured archive page ID.
  * @return int|string Lernen page ID when found, otherwise the original value.
  */
 function useLernenAsCourseArchivePage($archive_page_id)
 {
     $lernen_page = get_page_by_path('lernen-info');
+    if (!$lernen_page) {
+        return $archive_page_id;
+    }
 
-    return $lernen_page ? $lernen_page->ID : $archive_page_id;
+    // Don't let Tutor swap the Lernen page's content for the course archive loop.
+    if (!is_admin() && is_page($lernen_page->ID)) {
+        return $archive_page_id;
+    }
+
+    return $lernen_page->ID;
 }
 
 function enqueueTutorEditorOverride()

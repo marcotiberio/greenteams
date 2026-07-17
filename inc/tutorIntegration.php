@@ -16,6 +16,38 @@ add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueueTutorEditorOverride')
 add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\enqueueTutorEditorOverride');
 add_action('wp_footer', __NAMESPACE__ . '\\tutorDashboardLabelOverrides');
 add_action('template_redirect', __NAMESPACE__ . '\\overridePasswordProtectedArchiveLink');
+add_filter('hide_admin_bar_for_users', __NAMESPACE__ . '\\allowInstructorWpAdmin');
+
+/**
+ * Let instructors back into the WP admin area while keeping it restricted for
+ * subscribers/students.
+ *
+ * Tutor Pro blocks non-admins from wp-admin when the `hide_admin_bar_for_users`
+ * option is on (see Frontend::restrict_wp_admin_area / has_admin_area_access).
+ * That check is role-based, not capability-based, so there is no capability to
+ * grant — instead we force the option off for users with the instructor role,
+ * leaving it enabled for everyone else.
+ *
+ * Tutor exposes each option through a filter named after the option key
+ * (Utils::get_option runs `apply_filters( $key, $value )`), so we hook the
+ * `hide_admin_bar_for_users` key and return false for instructors.
+ *
+ * @param mixed $value Current option value (boolean once on/off is normalised).
+ * @return mixed
+ */
+function allowInstructorWpAdmin($value)
+{
+    if (!function_exists('tutor')) {
+        return $value;
+    }
+
+    $user = wp_get_current_user();
+    if ($user && in_array(tutor()->instructor_role, (array) $user->roles, true)) {
+        return false;
+    }
+
+    return $value;
+}
 
 /**
  * Rewrite the course-archive link on the password-protected course/bundle screen

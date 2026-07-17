@@ -22,7 +22,7 @@
   },
   "Components/BlockCta/Assets/logo.svg": {
     "file": "assets/logo-eeb7436e.svg",
-    "src": "Components/NavigationMainLogo/Assets/logo.svg"
+    "src": "Components/BlockCta/Assets/logo.svg"
   },
   "Components/BlockCta/Assets/twitter.svg": {
     "file": "assets/twitter-bc2ba69f.svg",
@@ -47,7 +47,7 @@
     "src": "Components/BlockProductSpecs/script.js"
   },
   "Components/BlockVideoOembed/script.js": {
-    "file": "assets/script-f9ad060b.js",
+    "file": "assets/script-0412fa72.js",
     "imports": [
       "_helpers-eb6ff3c9.js"
     ],
@@ -55,7 +55,7 @@
     "src": "Components/BlockVideoOembed/script.js"
   },
   "Components/BlockVideoText/script.js": {
-    "file": "assets/script-0412fa72.js",
+    "file": "assets/script-8850fc2e.js",
     "imports": [
       "_helpers-eb6ff3c9.js"
     ],
@@ -100,7 +100,7 @@
     "src": "Components/HeroSliderComposite/script.js"
   },
   "Components/HeroVideoBackground/script.js": {
-    "file": "assets/script-8850fc2e.js",
+    "file": "assets/script-f9ad060b.js",
     "imports": [
       "_helpers-eb6ff3c9.js"
     ],
@@ -131,7 +131,7 @@
   },
   "Components/NavigationMainLogo/Assets/logo.svg": {
     "file": "assets/logo-eeb7436e.svg",
-    "src": "Components/NavigationMainLogo/Assets/logo.svg"
+    "src": "Components/BlockCta/Assets/logo.svg"
   },
   "Components/ScrolltriggerComparison/script.js": {
     "file": "assets/script-6305a696.js",

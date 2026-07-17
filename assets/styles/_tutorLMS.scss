@@ -523,3 +523,9 @@
     }
   }
 }
+
+// Make the main content column full width (Tutor defaults it to 66% via .tutor-col-xl-8).
+.tutor-col-xl-8 {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+}

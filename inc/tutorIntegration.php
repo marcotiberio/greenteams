@@ -10,41 +10,46 @@
 
 namespace Flynt\TutorIntegration;
 
+const LERNEN_PAGE_URL = 'https://greenteams-netzwerk.eco/lernen-info/';
+
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueueTutorEditorOverride');
 add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\enqueueTutorEditorOverride');
 add_action('wp_footer', __NAMESPACE__ . '\\tutorDashboardLabelOverrides');
-add_filter('tutor_filter_course_archive_page', __NAMESPACE__ . '\\useLernenAsCourseArchivePage');
+add_action('template_redirect', __NAMESPACE__ . '\\overridePasswordProtectedArchiveLink');
 
 /**
- * Point Tutor's "Course Archive Page" at the Lernen page (/lernen-info) instead
- * of the unused "Modul" page. This drives course_archive_page_url(), which is
- * where the close (X) button on the password-protected course/bundle template
- * links to, as well as other Tutor "back to courses" links.
+ * Rewrite the course-archive link on the password-protected course/bundle screen
+ * to the Lernen page.
  *
- * Tutor reuses this same filter to identify which page IS the course archive and
- * then replaces that page's main query with the course loop
- * (Template::limit_course_query_archive on pre_get_posts). We only want to change
- * the link target, not turn the Lernen page into an archive listing — so when the
- * current main query is the Lernen page itself, we return the original value so
- * Tutor leaves the page's own backend-built content intact.
+ * Tutor renders that screen from a hardcoded plugin template
+ * (tutor/templates/single/password-protected.php) whose close (X) button links to
+ * tutor_utils()->course_archive_page_url() — i.e. the unused "Modul" page. We can't
+ * override that template from the theme, and repointing Tutor's "Course Archive
+ * Page" setting would turn the Lernen page itself into a course-archive listing.
  *
- * @param int|string $archive_page_id Currently configured archive page ID.
- * @return int|string Lernen page ID when found, otherwise the original value.
+ * So instead we buffer this specific screen's output and swap the archive URL for
+ * the Lernen page URL, leaving Tutor's archive configuration (and the Lernen page's
+ * own content) untouched.
  */
-function useLernenAsCourseArchivePage($archive_page_id)
+function overridePasswordProtectedArchiveLink()
 {
-    // Tutor reuses this filter during pre_get_posts to detect which page is the
-    // course archive and then replaces that page's query with the course loop
-    // (Template::limit_course_query_archive). Only override the value outside of
-    // that detection path, i.e. when Tutor is building the archive URL for links
-    // such as the close (X) button on the password-protected course template.
-    if (doing_action('pre_get_posts')) {
-        return $archive_page_id;
+    if (!function_exists('tutor') || !function_exists('tutor_utils')) {
+        return;
     }
 
-    $lernen_page = get_page_by_path('lernen-info');
+    $postTypes = [tutor()->course_post_type, tutor()->bundle_post_type];
+    if (!is_singular($postTypes) || !post_password_required()) {
+        return;
+    }
 
-    return $lernen_page ? $lernen_page->ID : $archive_page_id;
+    $archiveUrl = tutor_utils()->course_archive_page_url();
+    if (empty($archiveUrl)) {
+        return;
+    }
+
+    ob_start(function ($html) use ($archiveUrl) {
+        return str_replace(esc_url($archiveUrl), esc_url(LERNEN_PAGE_URL), $html);
+    });
 }
 
 function enqueueTutorEditorOverride()

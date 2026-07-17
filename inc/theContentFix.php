@@ -38,6 +38,14 @@ add_filter('wp_insert_post_data', function ($data, $postArr) {
 
 add_shortcode('flyntTheContent', function ($attrs) {
     $postId = $attrs['id'];
+    // Bail out while a post is being saved/inserted. Yoast expands shortcodes on
+    // wp_insert_post to build its indexable; running the full Timber::context()
+    // there fires get_body_class() outside the admin, which fatals in Tutor's
+    // body_class hook (get_current_screen() is undefined on front-end requests,
+    // e.g. duplicating a course from the frontend instructor dashboard).
+    if (doing_action('wp_insert_post') || doing_action('save_post')) {
+        return '';
+    }
     // in case the post id was not set correctly and is 0
     if (!empty($postId)) {
         $context = Timber::context();

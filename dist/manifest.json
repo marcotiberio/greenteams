@@ -22,7 +22,7 @@
   },
   "Components/BlockCta/Assets/logo.svg": {
     "file": "assets/logo-eeb7436e.svg",
-    "src": "Components/BlockCta/Assets/logo.svg"
+    "src": "Components/NavigationMainLogo/Assets/logo.svg"
   },
   "Components/BlockCta/Assets/twitter.svg": {
     "file": "assets/twitter-bc2ba69f.svg",
@@ -131,7 +131,7 @@
   },
   "Components/NavigationMainLogo/Assets/logo.svg": {
     "file": "assets/logo-eeb7436e.svg",
-    "src": "Components/BlockCta/Assets/logo.svg"
+    "src": "Components/NavigationMainLogo/Assets/logo.svg"
   },
   "Components/ScrolltriggerComparison/script.js": {
     "file": "assets/script-6305a696.js",
@@ -307,7 +307,7 @@
     "src": "assets/main.js"
   },
   "assets/main.scss": {
-    "file": "assets/main-61d23889.css",
+    "file": "assets/main-1165f753.css",
     "isEntry": true,
     "src": "assets/main.scss"
   },

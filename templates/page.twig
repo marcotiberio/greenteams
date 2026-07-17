@@ -6,7 +6,15 @@
   {% else %}
     {{ renderComponent('BlockPageHeader', {'post': post}) }}
   {% endif %}
-  {% for component in post.meta('pageComponents') %}
-    {{ renderComponent(component) }}
-  {% endfor %}
+  {% if post.meta('pageComponents') %}
+    {% for component in post.meta('pageComponents') %}
+      {{ renderComponent(component) }}
+    {% endfor %}
+  {% else %}
+    {# Fallback for pages whose body is injected via the_content filter,
+       e.g. TutorLMS static pages (student/instructor registration, cart, checkout) #}
+    <div class="tutor-wrap">
+      {{ post.content }}
+    </div>
+  {% endif %}
 {% endblock %}

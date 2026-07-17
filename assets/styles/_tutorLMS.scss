@@ -118,6 +118,109 @@
   }
 }
 
+// Student / instructor registration form (injected via the_content on the
+// Tutor static pages, wrapped in .tutor-wrap — see templates/page.twig).
+#tutor-registration-wrap {
+  @apply w-full;
+  @apply max-w-screen-max;
+  @apply mx-auto;
+  @apply px-xs;
+  @apply py-sm;
+  @apply sm:p-sm;
+  @apply md:p-md;
+  box-shadow: none !important;
+
+  #tutor-registration-form {
+    @apply p-0;
+  }
+
+  // Two-column responsive grid, collapses to one column on small screens.
+  .tutor-form-row {
+    @apply flex;
+    @apply flex-wrap;
+    @apply gap-sm;
+    margin: 0 0 var(--spacingSmall) !important; // override Tutor's row negative margins
+  }
+
+  .tutor-form-col-6 {
+    @apply grow;
+    @apply shrink;
+    @apply p-0;
+    flex-basis: calc(50% - 15px); // half of gap-sm (30px)
+    min-width: 240px;
+  }
+
+  .tutor-form-col-12 {
+    @apply w-full;
+    @apply p-0;
+  }
+
+  .tutor-form-group {
+    @apply flex;
+    @apply flex-col;
+    @apply gap-[8px];
+    @apply m-0;
+  }
+
+  // Password field: keep the show/hide toggle aligned to the underline input.
+  .tutor-password-field {
+    @apply relative;
+
+    .show-hide-btn {
+      @apply absolute;
+      @apply right-0;
+      @apply top-[6px];
+      @apply cursor-pointer;
+    }
+  }
+
+  .tutor-password-strength-hint {
+    @apply mt-[6px];
+  }
+
+  // Validation error box.
+  .tutor-alert {
+    @apply bg-white;
+    @apply border-2;
+    @apply border-orange;
+    @apply p-xs;
+    @apply mb-sm;
+    @apply rounded-none;
+
+    .tutor-required-fields {
+      @apply m-0;
+      @apply p-0;
+      list-style: none;
+
+      li {
+        @apply text-black;
+
+        &::before {
+          content: none;
+        }
+      }
+    }
+  }
+
+  // Terms & conditions consent: reset the global bold form-label styling.
+  label[for='tutor-terms-conditions'] {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+
+    a {
+      @apply text-green;
+      @apply underline;
+      @apply underline-offset-[4px];
+    }
+  }
+
+  // Nudge the submit button (styling inherited from .tutor-wrap .tutor-btn-primary).
+  .tutor-btn-primary {
+    @apply mt-sm;
+    @apply w-fit !important;
+  }
+}
+
 .single-lesson {
   @apply pt-[70px];
 

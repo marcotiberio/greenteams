@@ -13,6 +13,23 @@ namespace Flynt\TutorIntegration;
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\enqueueTutorEditorOverride');
 add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\enqueueTutorEditorOverride');
 add_action('wp_footer', __NAMESPACE__ . '\\tutorDashboardLabelOverrides');
+add_filter('tutor_filter_course_archive_page', __NAMESPACE__ . '\\useLernenAsCourseArchivePage');
+
+/**
+ * Point Tutor's "Course Archive Page" at the Lernen page (/lernen-info) instead
+ * of the unused "Modul" page. This drives course_archive_page_url(), which is
+ * where the close (X) button on the password-protected course/bundle template
+ * links to, as well as other Tutor "back to courses" links.
+ *
+ * @param int|string $archive_page_id Currently configured archive page ID.
+ * @return int|string Lernen page ID when found, otherwise the original value.
+ */
+function useLernenAsCourseArchivePage($archive_page_id)
+{
+    $lernen_page = get_page_by_path('lernen-info');
+
+    return $lernen_page ? $lernen_page->ID : $archive_page_id;
+}
 
 function enqueueTutorEditorOverride()
 {

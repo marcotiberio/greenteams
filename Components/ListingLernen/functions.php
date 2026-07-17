@@ -29,8 +29,7 @@ add_filter('Flynt/addComponentData?name=ListingLernen', function ($data) {
         'post_type' => $postType,
         'ignore_sticky_posts' => 1,
         'posts_per_page' => -1,
-        'meta_key' => 'end_date',
-        'orderby' => 'meta_value',
+        'orderby' => 'menu_order',
         'order' => 'ASC'
     ];
 

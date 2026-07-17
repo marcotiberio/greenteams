@@ -33,17 +33,18 @@ add_filter('tutor_filter_course_archive_page', __NAMESPACE__ . '\\useLernenAsCou
  */
 function useLernenAsCourseArchivePage($archive_page_id)
 {
+    // Tutor reuses this filter during pre_get_posts to detect which page is the
+    // course archive and then replaces that page's query with the course loop
+    // (Template::limit_course_query_archive). Only override the value outside of
+    // that detection path, i.e. when Tutor is building the archive URL for links
+    // such as the close (X) button on the password-protected course template.
+    if (doing_action('pre_get_posts')) {
+        return $archive_page_id;
+    }
+
     $lernen_page = get_page_by_path('lernen-info');
-    if (!$lernen_page) {
-        return $archive_page_id;
-    }
 
-    // Don't let Tutor swap the Lernen page's content for the course archive loop.
-    if (!is_admin() && is_page($lernen_page->ID)) {
-        return $archive_page_id;
-    }
-
-    return $lernen_page->ID;
+    return $lernen_page ? $lernen_page->ID : $archive_page_id;
 }
 
 function enqueueTutorEditorOverride()

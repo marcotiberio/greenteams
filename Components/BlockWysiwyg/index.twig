@@ -17,9 +17,9 @@
       ">
       {{ contentHtml|e('wp_kses_post') }}
       {% if buttonLink %}
-        <a 
-          class="button button--outline" 
-          href="{{ buttonLink.url }}" 
+        <a
+          class="button button--outline"
+          href="{{ buttonLink.url }}"
           {% if buttonLink.target %} target="{{ buttonLink.target }}" rel="noreferrer noopener"{% endif %}>
           {{ buttonLink.title }}
         </a>

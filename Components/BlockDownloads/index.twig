@@ -7,7 +7,7 @@
     {% endif %}
     <div class="downloads">
       {% for download in repeaterDownloads %}
-        <a class="download button button--full" href="{{ download.file.url|e }}" alt="{{ download.file.alt|e }}" target="_blank" rel="noreferrer noopener">
+        <a class="download button button--full" href="{{ download.file.url|e }}" alt="{{ download.file.alt|e }}" {{ download.noModal ? 'data-pdf-modal="off"' }} target="_blank" rel="noreferrer noopener">
           <div class="download-title">
             <p class="sans">{{ download.file.title|e }}</p>
           </div>

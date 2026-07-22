@@ -85,6 +85,17 @@ function getACFLayout()
                 ],
             ],
             [
+                'label' => __('Open PDF directly (no overlay)', 'flynt'),
+                'instructions' => __('Only affects PDF files. By default they open in an in-page overlay. Enable this to open the file directly in a new tab / download instead.', 'flynt'),
+                'name' => 'pdfNoModal',
+                'type' => 'true_false',
+                'ui' => 1,
+                'required' => 0,
+                'wrapper' => [
+                    'width' => 50
+                ],
+            ],
+            [
                 'label' => __('Options', 'flynt'),
                 'name' => 'optionsTab',
                 'type' => 'tab',

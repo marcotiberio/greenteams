@@ -529,7 +529,7 @@
     @apply w-full;
     @apply max-w-screen-max !important;
     @apply mx-auto;
-    @apply p-0 !important;
+    @apply py-0 !important;
   }
 
   // Make the main content column full width (Tutor defaults it to 66% via .tutor-col-xl-8).
@@ -539,6 +539,6 @@
   }
 
   .tutor-course-spotlight-tab {
-    @apply p-0 !important;
+    @apply py-0 !important;
   }
 }

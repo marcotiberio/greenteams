@@ -40,6 +40,16 @@ Options::addTranslatable('NavigationBurger', [
         ]
     ],
     [
+        'label' => __('Menu CTA Button', 'flynt'),
+        'name' => 'menuCta',
+        'type' => 'link',
+        'return_format' => 'array',
+        'instructions' => __('Optional button rendered below the menu items.', 'flynt'),
+        'wrapper' =>  [
+            'width' => '100',
+        ]
+    ],
+    [
         'label' => __('Labels', 'flynt'),
         'name' => 'labelsTab',
         'type' => 'tab',

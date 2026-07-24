@@ -23,7 +23,7 @@
           {% for item in menu.items %}
             {# regular menu item #}
             {% if not item.children %}
-              <li class="item {{- item.current ? ' current-menu-item underline underline-offset-8' }}">
+              <li class="item {{ item.class }} {{- item.current ? ' current-menu-item underline underline-offset-8' }}">
                 <a class="link font-menu uppercase lg:hover:underline underline-offset-8" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' }}>
                   {{ item.title }}
                 </a>
@@ -31,13 +31,13 @@
             {% endif %}
             {# menu with submenu item #}
             {% if item.children %}
-              <li class="item open-submenu {{- item.current ? ' current-menu-item underline underline-offset-8' }}" >
+              <li class="item open-submenu {{ item.class }} {{- item.current ? ' current-menu-item underline underline-offset-8' }}" >
                 <a class="link font-menu uppercase hover:underline underline-offset-8" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' }}>
                   {{ item.title }}
                 </a>
                 <ul class="submenu">
                   {% for subitem in item.children %}
-                    <li class="item {{- subitem.current ? ' current-menu-item underline underline-offset-8' }}">
+                    <li class="item {{ subitem.class }} {{- subitem.current ? ' current-menu-item underline underline-offset-8' }}">
                       <a class="link !p-0 font-menu uppercase hover:underline underline-offset-8" href="{{ subitem.link }}" {{ subitem.target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' }}>{{ subitem.title }}</a>
                     </li>
                   {% endfor %}
@@ -45,6 +45,17 @@
               </li>
             {% endif %}
           {% endfor %}
+          {# menu cta button #}
+          {% if menuCta %}
+            <li class="item menu-cta mt-xs">
+              <a
+                class="link font-menu uppercase inline-flex items-center justify-center border-2 border-black !py-xs !px-sm leading-none hover:bg-black hover:!text-beige transition-colors duration-200"
+                href="{{ menuCta.url }}"
+                {% if menuCta.target %} target="{{ menuCta.target }}" rel="noopener noreferrer"{% endif %}>
+                {{ menuCta.title }}
+              </a>
+            </li>
+          {% endif %}
         <div>
       </ul>
 

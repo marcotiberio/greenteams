@@ -2,7 +2,7 @@
   {% for item in items %}
     {# regular menu item #}
     {% if not item.children %}
-      <li class="item flex align-middle items-center font-bodyMenu {{- item.current ? ' current-menu-item text-green' }}">
+      <li class="item flex align-middle items-center font-bodyMenu {{ item.class }} {{- item.current ? ' current-menu-item text-green' }}">
         <a class="link font-bodyMenu text-black flex align-middle items-center hover:text-green text-currentColor transition-transform duration-200 ease-in-out" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noopener noreferrer"' }}>
           {{ item.title }}
         </a>
@@ -10,7 +10,7 @@
     {% endif %}
     {# menu with submenu item #}
     {% if item.children %}
-      <li x-data="{ showDropdown: false }" class="item flex align-middle items-center open-submenu font-bodyMenu {{- item.current ? ' current-menu-item text-green' }}" >
+      <li x-data="{ showDropdown: false }" class="item flex align-middle items-center open-submenu font-bodyMenu {{ item.class }} {{- item.current ? ' current-menu-item text-green' }}" >
         <a 
           @mouseover="showDropdown = true"
           @mouseleave="showDropdown = false"
@@ -24,7 +24,7 @@
           @mouseover="showDropdown = true"
           @mouseleave="showDropdown = false">
             {% for subitem in item.children %}
-              <li class="item {{- subitem.current ? ' current-menu-item text-black' }}">
+              <li class="item {{ subitem.class }} {{- subitem.current ? ' current-menu-item text-black' }}">
                 <a class="link flex text-black align-middle items-center no-underline hover:text-green text-currentColor transition-transform duration-200 ease-in-out" href="{{ subitem.link }}">{{ subitem.title }}</a>
               </li>
             {% endfor %}

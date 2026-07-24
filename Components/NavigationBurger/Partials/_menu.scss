@@ -77,3 +77,9 @@
     visibility: visible;
   }
 }
+
+.menu-cta {
+  .link {
+      @apply hover:text-white !important;
+    }
+}

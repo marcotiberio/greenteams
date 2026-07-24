@@ -41,77 +41,7 @@
       </div>
     {% endblock %}
     {{ renderComponent('BlockPopup') }}
-
-    {#
-      Global PDF viewer overlay.
-      Intercepts clicks on any link to a .pdf file and opens it in an in-page
-      overlay instead of navigating away. On by default, theme-wide.
-      Opt out per link via data-pdf-modal="off" (editor toggles on
-      BlockWysiwyg / BlockPdfDownload / BlockDownloads) or the class
-      "no-pdf-modal" (manual WYSIWYG links). On iOS/iPadOS, where browsers
-      can't reliably render a PDF in an iframe, the overlay steps aside and
-      the link opens/downloads natively.
-    #}
-    <div
-      x-data="{
-        open: false,
-        url: '',
-        title: '',
-        unsupported: false,
-        init() {
-          const ua = navigator.userAgent || '';
-          this.unsupported = /iP(ad|hone|od)/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-          document.addEventListener('click', (e) => this.onClick(e), true);
-        },
-        onClick(e) {
-          if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-          const a = e.target.closest ? e.target.closest('a[href]') : null;
-          if (!a) return;
-          if (a.dataset.pdfModal === 'off' || a.classList.contains('no-pdf-modal')) return;
-          if (!/\.pdf($|[?#])/i.test(a.getAttribute('href') || '')) return;
-          if (this.unsupported) return;
-          e.preventDefault();
-          this.url = a.href;
-          this.title = (a.textContent || '').trim() || 'PDF';
-          this.open = true;
-        },
-        close() { this.open = false; this.url = ''; }
-      }"
-      x-show="open"
-      x-cloak
-      @keydown.escape.window="close()"
-      x-transition.opacity
-      x-effect="document.body.style.overflow = open ? 'hidden' : ''"
-      class="fixed inset-0 z-[9999] flex items-center justify-center p-xs"
-      role="dialog"
-      aria-modal="true"
-      aria-label="{{ __('PDF viewer', 'flynt') }}">
-      <div class="absolute inset-0 bg-black/60" @click="close()" aria-hidden="true"></div>
-      <div class="relative flex flex-col w-full max-w-screen-lg h-[90vh] bg-white shadow-xl overflow-hidden">
-        <div class="flex items-center justify-between gap-sm p-xs bg-white">
-          <p class="font-sans truncate" x-text="title"></p>
-          <div class="flex items-center gap-xs shrink-0">
-            <a class="button button--outline" :href="url" target="_blank" rel="noreferrer noopener">{{ __('Open in new tab', 'flynt') }}</a>
-            <a class="button button--outline" :href="url" download>{{ __('Download', 'flynt') }}</a>
-            <button
-              type="button"
-              @click="close()"
-              class="flex items-center justify-center w-[50px] h-[50px] rounded-full bg-white text-black hover:bg-black hover:text-white cursor-pointer shrink-0"
-              aria-label="{{ __('Close', 'flynt') }}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div class="relative grow min-h-0 bg-grey">
-          <template x-if="open">
-            <iframe :src="url" class="block w-full h-full" style="border:0;" title="{{ __('PDF viewer', 'flynt') }}"></iframe>
-          </template>
-        </div>
-      </div>
-    </div>
+    {{ renderComponent('PdfViewer') }}
 
     <div class="wpFooter">
       {{ function('wp_footer') }}

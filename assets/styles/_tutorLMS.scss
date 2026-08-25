@@ -542,3 +542,42 @@
     @apply py-0 !important;
   }
 }
+
+.tutor-bundle-course-list-desc {
+  .tutor-bundle-course-title {
+    @apply text-[1.25rem] !important;
+  }
+
+  .tutor-mt-4 {
+    @apply text-[1rem] !important;
+  }
+
+  .tutor-fs-8,
+  .tutor-color-muted {
+    @apply hidden !important;
+  }
+
+  // Category links (the author link carries target="_parent"; the
+  // "Uncategorized" fallback is already hidden via .tutor-color-muted).
+  .tutor-mt-4 a:not([target]) {
+    @apply hidden !important;
+  }
+
+  // Author link.
+  .tutor-mt-4 a[target='_parent'] {
+    @apply no-underline;
+    @apply hover:no-underline;
+  }
+}
+
+.page-student-registration {
+  .tutor-wrap{
+    @apply w-full;
+    @apply max-w-screen-max;
+    @apply mx-auto;
+    @apply px-xs;
+    @apply py-sm;
+    @apply sm:p-sm;
+    @apply md:p-md;
+  }
+}

@@ -88,6 +88,7 @@ add_action('Flynt/afterRegisterComponents', function () {
                     // Components\HeroSliderComposite\getACFLayout(),
                     // Components\ListTextLink\getACFLayout(),
                     Components\ListingEvents\getACFLayout(),
+                    Components\ListingProjects\getACFLayout(),
                     Components\ListingEventsFeat\getACFLayout(),
                     Components\ListingLernen\getACFLayout(),
                     Components\SliderBox\getACFLayout(),
@@ -115,6 +116,11 @@ add_action('Flynt/afterRegisterComponents', function () {
                     'param' => 'post_type',
                     'operator' => '!=',
                     'value' => 'event'
+                ],
+                [
+                    'param' => 'post_type',
+                    'operator' => '!=',
+                    'value' => 'project'
                 ],
                 [
                     'param' => 'post_type',

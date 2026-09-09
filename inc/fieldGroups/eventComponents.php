@@ -170,6 +170,7 @@ add_action('Flynt/afterRegisterComponents', function () {
                     Components\ListingBlog\getACFLayout(),
                     Components\GridVideos\getACFLayout(),
                     Components\ListingEvents\getACFLayout(),
+                    Components\ListingProjects\getACFLayout(),
                     Components\SliderBox\getACFLayout(),
                     Components\SliderHorizontal\getACFLayout(),
                     Components\SliderImages\getACFLayout(),

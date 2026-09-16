@@ -80,16 +80,6 @@ add_action('Flynt/afterRegisterComponents', function () {
             [
                 'label' => 'Time',
                 'name' => 'eventTime',
-                'type' => 'time_picker',
-                'display_format' => 'g:i a',
-                'return_format' => 'g:i a',
-                'wrapper' => [
-                    'width' => 50,
-                ]
-            ],
-            [
-                'label' => 'Time',
-                'name' => 'eventTime',
                 'type' => 'text',
                 'wrapper' => [
                     'width' => 50,

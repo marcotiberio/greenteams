@@ -41,7 +41,7 @@ add_action('Flynt/afterRegisterComponents', function () {
                 'conditional_logic' => [
                     [
                         [
-                            'field' => 'is_recurring',
+                            'fieldPath' => 'is_recurring',
                             'operator' => '==',
                             'value' => '1',
                         ]
@@ -114,16 +114,6 @@ add_action('Flynt/afterRegisterComponents', function () {
                 'display_format' => 'F j, Y',
                 'return_format' => 'Ymd',
                 'first_day' => 1,
-                'wrapper' => [
-                    'width' => 33,
-                ]
-            ],
-            [
-                'label' => 'Time',
-                'name' => 'eventTime',
-                'type' => 'time_picker',
-                'display_format' => 'g:i a',
-                'return_format' => 'g:i a',
                 'wrapper' => [
                     'width' => 33,
                 ]

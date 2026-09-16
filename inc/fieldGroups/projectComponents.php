@@ -5,7 +5,7 @@ use Flynt\Components;
 
 add_action('Flynt/afterRegisterComponents', function () {
     ACFComposer::registerFieldGroup([
-        'name' => 'eventMeta',
+        'name' => 'projectMeta',
         'title' => 'Main Content',
         'style' => '',
         'menu_order' => 1,

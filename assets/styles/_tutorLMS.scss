@@ -585,3 +585,9 @@
     @apply md:p-md;
   }
 }
+
+.grassblade {
+  .tutor-col-xl-8 {
+    @apply px-0 !important;
+  }
+}

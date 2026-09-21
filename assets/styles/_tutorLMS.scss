@@ -531,7 +531,7 @@
 .tutor-course-spotlight-wrapper {
   .tutor-container {
     @apply w-full;
-    @apply max-w-screen-max !important;
+    @apply max-w-none !important;
     @apply mx-auto;
     @apply py-0 !important;
   }

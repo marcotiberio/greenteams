@@ -17,6 +17,7 @@ add_action('admin_enqueue_scripts', __NAMESPACE__ . '\\enqueueTutorEditorOverrid
 add_action('wp_footer', __NAMESPACE__ . '\\tutorDashboardLabelOverrides');
 add_action('template_redirect', __NAMESPACE__ . '\\overridePasswordProtectedArchiveLink');
 add_filter('hide_admin_bar_for_users', __NAMESPACE__ . '\\allowInstructorWpAdmin');
+add_filter('body_class', __NAMESPACE__ . '\\addImportedCourseBodyClass');
 
 /**
  * Let instructors back into the WP admin area while keeping it restricted for
@@ -82,6 +83,79 @@ function overridePasswordProtectedArchiveLink()
     ob_start(function ($html) use ($archiveUrl) {
         return str_replace(esc_url($archiveUrl), esc_url(LERNEN_PAGE_URL), $html);
     });
+}
+
+/**
+ * Mark imported (GrassBlade xAPI/SCORM) courses with a `course-imported` body class.
+ *
+ * Tutor itself has no notion of an imported course — the distinction comes from the
+ * grassblade-xapi-tutorlms bridge, which stores the selected xAPI content id in the
+ * `show_xapi_content` post meta of a lesson or quiz when one is picked in the course
+ * builder. A natively authored lesson never carries that meta.
+ *
+ * The class is added on the course itself and on every lesson/quiz inside it, so CSS
+ * can target the whole imported-course experience (the spotlight view included)
+ * rather than just the screens that happen to hold the package.
+ *
+ * @param string[] $classes Body classes.
+ * @return string[]
+ */
+function addImportedCourseBodyClass($classes)
+{
+    if (!function_exists('tutor') || !function_exists('tutor_utils')) {
+        return $classes;
+    }
+
+    $postId = get_queried_object_id();
+    if (empty($postId)) {
+        return $classes;
+    }
+
+    $postType = get_post_type($postId);
+    $courseId = null;
+
+    if ($postType === tutor()->course_post_type) {
+        $courseId = $postId;
+    } elseif (in_array($postType, [tutor()->lesson_post_type, tutor()->quiz_post_type], true)) {
+        // A lesson can sit in an imported course without holding the package itself,
+        // so resolve the course and judge by its contents as a whole.
+        $courseId = tutor_utils()->get_course_id_by_subcontent($postId);
+    }
+
+    if (!empty($courseId) && isImportedCourse($courseId)) {
+        $classes[] = 'course-imported';
+    }
+
+    return $classes;
+}
+
+/**
+ * Whether any lesson or quiz in a course is backed by GrassBlade xAPI content.
+ *
+ * Tutor caches get_course_contents_by_id() per course, so the lookup stays cheap;
+ * the static array keeps repeat calls within a request free.
+ *
+ * @param int $courseId Course post id.
+ * @return bool
+ */
+function isImportedCourse($courseId)
+{
+    static $cache = [];
+
+    if (isset($cache[$courseId])) {
+        return $cache[$courseId];
+    }
+
+    $cache[$courseId] = false;
+
+    foreach ((array) tutor_utils()->get_course_contents_by_id($courseId) as $content) {
+        if (!empty(get_post_meta($content->ID, 'show_xapi_content', true))) {
+            $cache[$courseId] = true;
+            break;
+        }
+    }
+
+    return $cache[$courseId];
 }
 
 function enqueueTutorEditorOverride()

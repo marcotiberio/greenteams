@@ -586,7 +586,10 @@
   }
 }
 
-.grassblade {
+// Imported (GrassBlade xAPI/SCORM) courses: the embedded package supplies its own
+// padding, so drop Tutor's inline padding on the content column.
+// The body class comes from inc/tutorIntegration.php.
+.course-imported {
   .tutor-col-xl-8 {
     @apply px-0 !important;
   }

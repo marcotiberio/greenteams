@@ -4,9 +4,9 @@
   style="background-color: {% if options.colorBackground %}{{ options.colorBackground }}{% else %}transparent{% endif %};"
 >
   <script type="application/json">{{ jsonData|json_encode }}</script>
-  <div class="wrapper w-screen mx-auto">
+  <div class="wrapper w-screen mx-auto boxed">
     {% if headlineTitle %}
-      <h2 class="max-w-screen-lg mx-auto flex justify-center items-center text-center">{{ headlineTitle }}</h2>
+      <h2 class="max-w-screen-lg mx-auto flex justify-center items-center text-center mb-sm">{{ headlineTitle }}</h2>
     {% endif %}
 
     <div data-ref="slider" class="slider swiper-container mb-md">
@@ -28,8 +28,9 @@
             <div>
               {% if box.logo %}
                 <figure class="flex flex-col items-start justify-start">
-                  <img class="logo lazyload w-full max-w-full h-auto object-cover aspect-video"
+                  <img class="logo lazyload w-full max-w-full h-auto"
                   src="{{ box.logo.src | resize(32) }}"
+                  {% if box.logo.width and box.logo.height %}width="{{ box.logo.width }}" height="{{ box.logo.height }}"{% endif %}
                   data-srcset="{{function('wp_get_attachment_image_srcset', box.logo.id)}}"
                   data-sizes="auto">
                   {# {% if box.logo.title or box.logo.caption %}

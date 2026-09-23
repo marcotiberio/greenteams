@@ -4,11 +4,15 @@ flynt-component[name='SliderImages'] {
     position: relative;
 
     .swiper-wrapper {
+      align-items: flex-start;
       box-sizing: inherit;
     }
 
+    // each slide is as tall as its own image instead of the tallest one
     .swiper-slide {
+      align-self: flex-start;
       display: flex;
+      height: auto;
     }
     
     &-button {

@@ -6,7 +6,20 @@ export default function (sliderBox) {
   const refs = buildRefs(sliderBox)
   const data = getJSON(sliderBox)
   const swiper = initSlider(refs, data)
-  return () => swiper.destroy()
+  const destroyImageWatcher = watchImages(refs.slider, swiper)
+  return () => {
+    destroyImageWatcher()
+    swiper.destroy()
+  }
+}
+
+// images are lazyloaded, so their height is unknown on init:
+// recalculate the slide height whenever one of them arrives
+function watchImages (slider, swiper) {
+  const updateHeight = () => swiper.updateAutoHeight()
+  // `load` does not bubble, so listen in the capture phase
+  slider.addEventListener('load', updateHeight, true)
+  return () => slider.removeEventListener('load', updateHeight, true)
 }
 
 function initSlider (refs, data) {
@@ -14,8 +27,9 @@ function initSlider (refs, data) {
   const config = {
     modules: [Navigation, A11y, Autoplay, Pagination],
     a11y: options.a11y,
+    autoHeight: true,
     slidesPerView: 1,
-    spaceBetween: 0,
+    spaceBetween: 15,
     navigation: {
       nextEl: refs.next,
       prevEl: refs.prev
@@ -27,12 +41,12 @@ function initSlider (refs, data) {
     // },
     breakpoints: {
       640: {
-        slidesPerView: 1,
-        spaceBetween: 0
+        slidesPerView: 2,
+        spaceBetween: 15
       },
       1181: {
-        slidesPerView: 1,
-        spaceBetween: 0
+        slidesPerView: 4,
+        spaceBetween: 30
       }
     }
   }

@@ -47,7 +47,7 @@
     "src": "Components/BlockProductSpecs/script.js"
   },
   "Components/BlockVideoOembed/script.js": {
-    "file": "assets/script-f9ad060b.js",
+    "file": "assets/script-8850fc2e.js",
     "imports": [
       "_helpers-eb6ff3c9.js"
     ],
@@ -55,7 +55,7 @@
     "src": "Components/BlockVideoOembed/script.js"
   },
   "Components/BlockVideoText/script.js": {
-    "file": "assets/script-8850fc2e.js",
+    "file": "assets/script-f9ad060b.js",
     "imports": [
       "_helpers-eb6ff3c9.js"
     ],
@@ -134,7 +134,7 @@
     "src": "Components/NavigationMainLogo/Assets/logo.svg"
   },
   "Components/ScrolltriggerComparison/script.js": {
-    "file": "assets/script-6305a696.js",
+    "file": "assets/script-2dec4592.js",
     "imports": [
       "assets/main.js"
     ],
@@ -181,7 +181,7 @@
     "src": "Components/SliderHorizontal/script.js"
   },
   "Components/SliderImages/script.js": {
-    "file": "assets/script-e3a8cc97.js",
+    "file": "assets/script-2fd26d9c.js",
     "imports": [
       "_swiper-bundle.min-e382c7af.js",
       "_pagination-50e1862f.js",
@@ -302,12 +302,12 @@
       "Components/SliderLogos/script.ts",
       "Components/SliderQuotes/script.js"
     ],
-    "file": "assets/main-4430a663.js",
+    "file": "assets/main-86f435f1.js",
     "isEntry": true,
     "src": "assets/main.js"
   },
   "assets/main.scss": {
-    "file": "assets/main-85ac6834.css",
+    "file": "assets/main-5876ac0c.css",
     "isEntry": true,
     "src": "assets/main.scss"
   },

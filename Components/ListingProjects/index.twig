@@ -147,6 +147,9 @@
                   data-srcset="{{ function('wp_get_attachment_image_srcset', post.thumbnail.id) }}"
                   data-sizes="auto"
                   alt="{{ post.title }}">
+              {% else %}
+                {# Placeholder for projects without a featured image #}
+                <div class="w-full aspect-4/3 bg-blue" aria-hidden="true"></div>
               {% endif %}
               
               <div class="content w-full h-full flex flex-col justify-start gap-xs py-xs">

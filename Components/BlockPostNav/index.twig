@@ -3,7 +3,8 @@
   class="w-full mx-auto flex flex-col justify-between items-center
   {% if post.type == 'post' %}bg-blog{% endif %}
   {% if post.type == 'event' %}bg-event{% endif %}
-  {% if post.type == 'lernen' %}bg-lernen{% endif %}">
+  {% if post.type == 'lernen' %}bg-lernen{% endif %}
+  {% if post.type == 'project' %}bg-blue{% endif %}">
   <nav class="post-navigation boxed grid grid-cols-2 sm:grid-cols-3 gap-xs">
     {% if post.prev %}
       <a class="post-navigation__prev flex justify-start items-center gap-xs row-start-1 sm:row-auto" href="{{ post.prev.link }}">
@@ -29,6 +30,12 @@
       {% if post.type == 'lernen' %}
         <a class="button button--outline button--outlineNoArrow h-fit !font-bold" href="{{ labels.allArticlesLernenLink.url }}"{% if labels.allArticlesLernenLink.target %} target="{{ labels.allArticlesLernenLink.target }}" rel="noreferrer noopener"{% endif %}>
           {{ labels.allArticlesLernenLink.title|e }}
+        </a>
+      {% endif %}
+      {% if post.type == 'project' %}
+        {% set projectsLink = labels.allArticlesProjectsLink %}
+        <a class="button button--outline button--outlineNoArrow h-fit !font-bold" href="{{ projectsLink.url ?: site.url ~ '/projekte/' }}"{% if projectsLink.target %} target="{{ projectsLink.target }}" rel="noreferrer noopener"{% endif %}>
+          {{ (projectsLink.title ?: 'Alle Projekte')|e }}
         </a>
       {% endif %}
     </div>

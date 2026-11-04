@@ -204,6 +204,11 @@
       @apply bg-lernen;
     }
   }
+  &-project {
+    flynt-component[name=NavigationBurger] {
+      @apply bg-blue;
+    }
+  }
 }
 
 // Menu CPTs
@@ -229,6 +234,14 @@
     flynt-component[name=NavigationBurger] {
       .menu {
         background: var(--lernen) !important;
+      }
+    }
+  }
+
+  &-project {
+    flynt-component[name=NavigationBurger] {
+      .menu {
+        background: var(--blue) !important;
       }
     }
   }

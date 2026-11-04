@@ -42,6 +42,15 @@ Options::addTranslatable('BlockPostNav', [
                 ],
             ],
             [
+                'label' => __('All Articles - Projekte', 'flynt'),
+                'name' => 'allArticlesProjectsLink',
+                'type' => 'link',
+                'instructions' => __('Leave empty to link to /projekte/ with the label "Alle Projekte".', 'flynt'),
+                'wrapper' => [
+                    'width' => 33,
+                ],
+            ],
+            [
                 'label' => __('Prev Button', 'flynt'),
                 'name' => 'prevButton',
                 'type' => 'text',

@@ -29,8 +29,8 @@ add_filter('Flynt/addComponentData?name=ListingProjects', function ($data) {
         'post_type' => $postType,
         'ignore_sticky_posts' => 1,
         'posts_per_page' => -1,
-        'orderby' => 'date',
-        'order' => 'DESC'
+        'orderby' => 'title',
+        'order' => 'ASC'
     ];
 
     if (!empty($themaIds)) {

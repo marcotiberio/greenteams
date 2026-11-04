@@ -58,8 +58,36 @@ function registerProjectPostType()
         'exclude_from_search'   => false,
         'publicly_queryable'    => true,
         'capability_type'       => 'page',
+        // Singles live under the overview page: /projekte/{slug}/
+        'rewrite'               => ['slug' => 'projekte', 'with_front' => false],
     ];
     register_post_type('project', $args);
 }
 
 add_action('init', '\\Flynt\\CustomPostTypes\\registerProjectPostType');
+
+// Flush rewrite rules once after the project slug changes.
+const PROJECT_REWRITE_VERSION = 'projekte-1';
+
+add_action('init', function () {
+    if (get_option('flynt_project_rewrite_version') !== PROJECT_REWRITE_VERSION) {
+        flush_rewrite_rules(false);
+        update_option('flynt_project_rewrite_version', PROJECT_REWRITE_VERSION);
+    }
+}, 99);
+
+// 301 the old /project/{slug}/ URLs to /projekte/{slug}/.
+add_action('template_redirect', function () {
+    if (!is_404()) {
+        return;
+    }
+    $path = trim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '', '/');
+    if (!preg_match('#^project/([^/]+)$#', $path, $matches)) {
+        return;
+    }
+    $project = get_page_by_path(sanitize_title($matches[1]), OBJECT, 'project');
+    if ($project && $project->post_status === 'publish') {
+        wp_safe_redirect(get_permalink($project), 301);
+        exit;
+    }
+});

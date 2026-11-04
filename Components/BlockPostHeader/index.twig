@@ -3,8 +3,13 @@
   class="w-full mx-auto flex flex-col justify-between items-center">
   <div class="wrapper max-w-screen-max mx-auto">
     <div class="flex flex-col lg:flex-row-reverse items-stretch min-h-[550px] h-full relative">
-      <div class="w-auto lg:w-1/2 lg:absolute right-0 min-h-[550px] h-full fade-in-bg" style="background-image: url('{{ post.thumbnail.src }}'); background-size: cover; background-position: center;">
-      </div>
+      {% if post.thumbnail or post.type != 'project' %}
+        <div class="w-auto lg:w-1/2 lg:absolute right-0 min-h-[550px] h-full fade-in-bg" style="background-image: url('{{ post.thumbnail.src }}'); background-size: cover; background-position: center;">
+        </div>
+      {% else %}
+        {# Placeholder for projects without a featured image #}
+        <div class="w-auto lg:w-1/2 lg:absolute right-0 min-h-[550px] h-full bg-blue" aria-hidden="true"></div>
+      {% endif %}
       <div class="w-full lg:w-1/2 h-full flex flex-col justify-between boxed !ml-0">
         <div class="flex flex-col justify-start gap-md">
           <div class="flex flex-col justify-start gap-xs">

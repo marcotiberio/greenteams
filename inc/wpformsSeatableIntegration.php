@@ -381,7 +381,9 @@ function testSeatableConnection()
  * Enqueue admin script for test connection button
  */
 add_action('acf/input/admin_enqueue_scripts', function () {
-    $screen = get_current_screen();
+    // ACF also fires this hook on wp-login.php (user fields on the register
+    // form), where the admin-only get_current_screen() isn't loaded.
+    $screen = function_exists('get_current_screen') ? get_current_screen() : null;
     if (!$screen || strpos($screen->id, 'globaloptions') === false) {
         return;
     }
